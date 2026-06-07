@@ -139,6 +139,12 @@ a{color:var(--accent);text-decoration:none}
 .card-visual .ph{text-align:center;color:var(--text-muted);font-size:12.5px;letter-spacing:.04em;padding:14px;line-height:1.5}
 .card-visual .ph b{display:block;color:#5f7682;font-size:11px;text-transform:uppercase;letter-spacing:.14em;margin-top:7px}
 .card-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.card-video{width:100%;height:100%;border:0;display:block}
+.card-visual a.imglink{display:block;width:100%;height:100%;position:relative;overflow:hidden}
+.card-visual a.imglink img{transition:transform .35s,filter .35s}
+.card-visual a.imglink:hover img{transform:scale(1.04);filter:brightness(1.1)}
+.open-badge{position:absolute;right:10px;bottom:10px;background:rgba(10,20,27,.82);color:var(--accent);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:7px;border:1px solid var(--rule);backdrop-filter:blur(4px);pointer-events:none}
+.card-visual img.cover-contain{object-fit:contain}
 .statstrip{display:flex;flex-direction:column;gap:0}
 .stat{display:flex;align-items:baseline;gap:10px;padding:11px 0;border-bottom:1px solid var(--rule-soft)}
 .stat:last-child{border-bottom:none}
@@ -288,7 +294,7 @@ a{color:var(--accent);text-decoration:none}
           <div class="card-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
         <div class="card-preview">
-          <div class="card-visual"><img src="FollowMeWagon.JPG" alt="Follow-Me Wagon following on open ground"></div>
+          <div class="card-visual"><iframe class="card-video" src="https://www.youtube.com/embed/O5EXJdPDLwc" title="Follow-Me Wagon demo" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
           <div class="statstrip">
             <div class="stat"><span class="stat-val">~18 hrs</span><span class="stat-lbl">active build time</span></div>
             <div class="stat"><span class="stat-val">0</span><span class="stat-lbl">prior robotics experience</span></div>
@@ -341,7 +347,7 @@ a{color:var(--accent);text-decoration:none}
           <div class="card-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
         <div class="card-preview">
-          <div class="card-visual"><img src="The%20Red%20Omen.jpg" alt="The Red Omen book cover"></div>
+          <div class="card-visual"><img class="cover-contain" src="The%20Red%20Omen.jpg" alt="The Red Omen book cover"></div>
           <div class="statstrip">
             <div class="stat"><span class="stat-val">Published</span><span class="stat-lbl">Kindle + paperback</span></div>
             <div class="stat"><span class="stat-val">4.9★</span><span class="stat-lbl">across 12 reviews</span></div>
@@ -428,7 +434,7 @@ a{color:var(--accent);text-decoration:none}
           <div class="card-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
         <div class="card-preview">
-          <div class="card-visual"><img src="Life%20Mx%20App.JPG" alt="Life Maintenance App dashboard"></div>
+          <div class="card-visual"><iframe class="card-video" src="https://www.youtube.com/embed/TA9QhYk0uvU" title="Life Maintenance App walkthrough" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
           <div class="statstrip">
             <div class="stat"><span class="stat-val">~1 hr</span><span class="stat-lbl">to a working prototype</span></div>
             <div class="stat"><span class="stat-val">iOS + Android</span><span class="stat-lbl">cross-platform</span></div>
@@ -472,7 +478,7 @@ a{color:var(--accent);text-decoration:none}
           <div class="card-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
         <div class="card-preview">
-          <div class="card-visual"><img src="Report%20Snippet.JPG" alt="Multi-agent viability report output"></div>
+          <div class="card-visual"><a class="imglink" href="followmewagon_report.html" target="_blank" rel="noopener"><img src="Report%20Snippet.JPG" alt="Multi-agent viability report output"><span class="open-badge">Open report ↗</span></a></div>
           <div class="statstrip">
             <div class="stat"><span class="stat-val">8 agents</span><span class="stat-lbl">6 producers + orchestrator + QC</span></div>
             <div class="stat"><span class="stat-val">~3 hrs</span><span class="stat-lbl">zero to working system</span></div>
@@ -512,7 +518,7 @@ a{color:var(--accent);text-decoration:none}
           <div class="card-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
         <div class="card-preview">
-          <div class="card-visual"><img src="Luminari%20Website%20snippet.JPG" alt="luminariexpanse.com live site"></div>
+          <div class="card-visual"><a class="imglink" href="https://luminariexpanse.com" target="_blank" rel="noopener"><img src="Luminari%20Website%20snippet.JPG" alt="luminariexpanse.com live site"><span class="open-badge">Visit site ↗</span></a></div>
           <div class="statstrip">
             <div class="stat"><span class="stat-val">5 pages</span><span class="stat-lbl">live and functional</span></div>
             <div class="stat"><span class="stat-val">0</span><span class="stat-lbl">prior web-dev experience</span></div>
@@ -559,7 +565,7 @@ a{color:var(--accent);text-decoration:none}
           <div class="card-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
         <div class="card-preview">
-          <div class="card-visual"><img src="Podcast%20Screenshot.JPG" alt="AI Laboratory Podcast episode"></div>
+          <div class="card-visual"><a class="imglink" href="https://www.youtube.com/@AI_Laboratory_Desk" target="_blank" rel="noopener"><img src="Podcast%20Screenshot.JPG" alt="AI Laboratory Podcast episode"><span class="open-badge">Watch ↗</span></a></div>
           <div class="statstrip">
             <div class="stat"><span class="stat-val">7 episodes</span><span class="stat-lbl">produced over ~2 months</span></div>
             <div class="stat"><span class="stat-val">3 platforms</span><span class="stat-lbl">streamed simultaneously</span></div>
@@ -597,7 +603,7 @@ a{color:var(--accent);text-decoration:none}
           <div class="card-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
         <div class="card-preview">
-          <div class="card-visual"><img src="Comic%20picture.JPG" alt="AI-generated zombie comic page"></div>
+          <div class="card-visual"><a class="imglink" href="Zombie%20Comic%20Strip.pdf" target="_blank" rel="noopener"><img src="Comic%20picture.JPG" alt="AI-generated zombie comic page"><span class="open-badge">Open comic ↗</span></a></div>
           <div class="statstrip">
             <div class="stat"><span class="stat-val">6 platforms</span><span class="stat-lbl">tested head-to-head</span></div>
             <div class="stat"><span class="stat-val">~70 min</span><span class="stat-lbl">first prompt to finished comic</span></div>
