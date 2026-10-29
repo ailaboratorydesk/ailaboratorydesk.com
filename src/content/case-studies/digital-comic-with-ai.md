@@ -1,7 +1,7 @@
 ---
 # date: year only; produced live on the AI Laboratory Podcast (2025). Confirm with Daniel.
 title: "Creating a Digital Comic Book with AI"
-oneLiner: "A controlled head-to-head test of six AI image platforms — same prompt, same characters — producing a 4-page comic in 70 minutes, and an honest finding about where these tools still fail."
+oneLiner: "A head-to-head comparison of six AI image platforms — same prompt, same characters — producing a 4-page comic in 70 minutes, and an honest finding about where these tools still fail."
 date: "2025"
 order: 8
 domains:

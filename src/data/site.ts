@@ -6,11 +6,11 @@
  */
 export const SITE = {
   url: 'https://www.ailaboratorydesk.com',
-  name: 'AI Laboratory',
+  name: 'AI LABORATORY™',
   author: 'Daniel Stroup',
-  title: 'AI Laboratory — Daniel Stroup',
+  title: 'AI LABORATORY™ | AI Consulting by Daniel Stroup',
   description:
-    'Daniel Stroup builds real projects with AI across many fields — from concept to delivery, executed as intended. Available for AI consulting.',
+    'AI LABORATORY™ consulting services: Daniel Stroup advises individuals and small teams on taking AI projects from concept to delivery.',
   /** Default share image (Open Graph / Twitter card), served from public/. */
   ogImage: '/AI%20Lab%20Logo.png',
   ogImageAlt: 'AI Laboratory logo',

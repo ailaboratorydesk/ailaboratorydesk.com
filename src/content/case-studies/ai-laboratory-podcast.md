@@ -37,11 +37,11 @@ links:
 
 ## What Was Built
 
-A live-streamed video podcast broadcast simultaneously to YouTube, X, and Twitch — seven ~1-hour episodes over about two months. Both a platform for solving real problems with AI and an AI experiment in its own right, built around automation to kill the post-production burden that ends most podcasts.
+A live-streamed video podcast broadcast simultaneously to YouTube, X, and Twitch — seven ~1-hour episodes over about two months. Both a platform for solving real problems with AI and a working AI project in its own right, built around automation to kill the post-production burden that ends most podcasts.
 
 ## Why It Was Built
 
-Two problems: prior podcast attempts demanded 2–12 hours of post-production per episode (a motivation-killer), and AI experimentation stays shallow without a forcing function. The show solved both — automated production for sustainability, and a live cadence to force a real experiment every episode.
+Two problems: prior podcast attempts demanded 2–12 hours of post-production per episode (a motivation-killer), and AI experimentation stays shallow without a forcing function. The show solved both — automated production for sustainability, and a live cadence to tackle a real AI problem every episode.
 
 ## Starting Competence
 
@@ -49,7 +49,7 @@ Prior podcast experience, but only manual, labor-heavy workflows; multi-platform
 
 ## How AI Was Used
 
-An extended Claude session designed the show before recording — audience, format, structure, workflow — and evaluated automation tools. Yardstream enabled simultaneous streaming, recording, and clip generation; Opus added short-form clips. Claude generated episode ideas, outlines, and hooks. Each episode ran a live AI experiment — some succeeded, some (a fantasy-sports chatbot) hit scope limits — and several became standalone portfolio projects.
+An extended Claude session designed the show before recording — audience, format, structure, workflow — and evaluated automation tools. Yardstream enabled simultaneous streaming, recording, and clip generation; Opus added short-form clips. Claude generated episode ideas, outlines, and hooks. Each episode took on a live AI problem — some succeeded, some (a fantasy-sports chatbot) hit scope limits — and several became standalone portfolio projects.
 
 ## Timeline & Conditions
 
@@ -57,7 +57,7 @@ An extended Claude session designed the show before recording — audience, form
 
 ## Outcome & Evidence
 
-Proved a fully automated, multi-platform production workflow is achievable with first-generation AI tools, with time savings large enough to make consistent production viable. Several on-air experiments seeded other portfolio projects.
+Proved a fully automated, multi-platform production workflow is achievable with first-generation AI tools, with time savings large enough to make consistent production viable. Several on-air projects seeded other portfolio projects.
 
 ## Key Metrics
 

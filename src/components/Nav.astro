@@ -1,4 +1,5 @@
 ---
+import { SITE } from '../data/site';
 interface Props { home?: boolean }
 const { home = false } = Astro.props;
 const base = home ? '' : '/';
@@ -7,14 +8,14 @@ const base = home ? '' : '/';
   <div class="nav-inner">
     <a class="nav-brand" href={home ? '#top' : '/'}>
       <img src="/assets/ai-laboratory-mark.png" alt="AI Laboratory">
-      <span>AI Laboratory</span>
+      <span>{SITE.name}</span>
     </a>
     <div class="nav-links">
       <a href={`${base}#consulting`}>Consulting</a>
       <a href={`${base}#work`}>Work</a>
       <a href={`${base}#about`}>About</a>
       <a href={`${base}#contact`}>Contact</a>
-      {/* Reserved future page link (hidden): <a href="/services">Services</a> */}
+      {/* Reserved future page link (hidden): <a href="/#consulting">Services</a> */}
     </div>
   </div>
 </nav>

@@ -14,7 +14,7 @@ const { entry } = Astro.props;
 const d = entry.data;
 ---
 <BaseLayout
-  title={`${d.title} — ${SITE.title}`}
+  title={`${d.title} — ${SITE.name} — ${SITE.author}`}
   description={d.oneLiner}
   path={`/work/${entry.id}/`}
   ogImage={d.cover.src}
