@@ -1,0 +1,98 @@
+---
+/**
+ * One case study as an expandable card (homepage) or as an always-open card
+ * (its own page at /work/<slug>/). All content comes from the entry's
+ * frontmatter and Markdown body; see src/content.config.ts.
+ */
+import { render } from 'astro:content';
+import type { CaseStudy } from '../lib/case-studies';
+import CaseStudyIcon from './CaseStudyIcon.astro';
+import AuditMoneyFlow from './visuals/AuditMoneyFlow.astro';
+
+interface Props {
+  entry: CaseStudy;
+  mode?: 'home' | 'page';
+}
+
+const { entry, mode = 'home' } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const isPage = mode === 'page';
+const TitleTag = isPage ? 'h1' : 'div';
+
+const escapeHtml = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const boldOnly = (s: string) => escapeHtml(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+const gvdHasStatus = d.goalVsDelivery?.rows.some((r) => r.status) ?? false;
+---
+<article class:list={['card', { open: isPage, 'card-static': isPage }]} data-project={entry.id}>
+  <div class="card-head" onclick={isPage ? undefined : 'toggleCard(this)'}>
+    <CaseStudyIcon name={d.icon} />
+    <div class="card-headtext">
+      <TitleTag class="card-title">{d.title}</TitleTag>
+      <div class="card-oneliner">{d.oneLiner}</div>
+    </div>
+    {!isPage && <div class="card-toggle"><Fragment set:html={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>`} /></div>}
+  </div>
+  <div class="card-preview">
+    <div class="card-visual">
+      {d.visual.type === 'youtube' && (
+        <iframe class="card-video" src={`https://www.youtube.com/embed/${d.visual.videoId}`} title={d.visual.title} allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      )}
+      {d.visual.type === 'image' && (
+        <a class="imglink" href={d.visual.href} target="_blank" rel="noopener"><img class={d.visual.fit === 'contain' ? 'cover-contain' : undefined} src={d.visual.src} alt={d.visual.alt}><span class="open-badge">{d.visual.badge}</span></a>
+      )}
+      {d.visual.type === 'illustration' && d.visual.name === 'audit-money-flow' && <AuditMoneyFlow />}
+    </div>
+    <div class="statstrip">
+      {d.stats.map((s) => (
+        <div class="stat"><span class="stat-val">{s.value}</span><span class="stat-lbl">{s.label}</span></div>
+      ))}
+    </div>
+  </div>
+  <div class="card-body"><div class="card-body-inner">
+
+    {d.goalVsDelivery && (
+      <div class="gvd">
+        <div class="gvd-head">Goal vs. Delivery</div>
+        <table>
+          <thead><tr><th>The bar I set</th><th>Where I landed</th>{gvdHasStatus && <th></th>}</tr></thead>
+          <tbody>
+            {d.goalVsDelivery.rows.map((r) => (
+              <tr>
+                <td>{r.goal}</td><td>{r.delivered}</td>
+                {r.status === 'Hit' && <td class="hit">✓ Hit</td>}
+                {r.status === 'Revised' && <td class="note">Revised</td>}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {d.goalVsDelivery.note && <div class="gvd-foot">{d.goalVsDelivery.note}</div>}
+      </div>
+    )}
+
+    {d.scope && <div class="scopebanner"><b>Scope:</b> {d.scope}</div>}
+
+    {d.timeline && (
+      <div class="timeline2">
+        {d.timeline.rows.map((r) => (
+          <div class="t2row"><span class="t2val">{r.value}</span><span class="t2txt">{r.text}</span></div>
+        ))}
+        {d.timeline.note && <div class="t2note">{d.timeline.note}</div>}
+      </div>
+    )}
+
+    {d.callout && <div class="callout" set:html={boldOnly(d.callout)} />}
+
+    <Content />
+
+    {d.signoff && <div class="cs-signoff">{d.signoff}</div>}
+
+    <div class="cs-evidence">
+      {d.links.map((l) => (
+        <a href={l.href} target="_blank" rel="noopener">{l.label}</a>
+      ))}
+      {!isPage && <a href={`/work/${entry.id}/`}>Case study page</a>}
+    </div>
+  </div></div>
+</article>

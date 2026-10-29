@@ -1,0 +1,22 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment variables and local secrets: never commit these
+.env
+.env.*
+*.pem
+*.key
+*api_token*
+*API Key*
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,54 @@
+---
+import { SITE } from '../data/site';
+/*
+ * Contact section. "Available for AI consulting" and a working contact route
+ * must stay: this is the AI LABORATORY trademark specimen. The form posts to
+ * Web3Forms (static site, no server); set the endpoint and fields in src/data/site.ts.
+ * Replies go to the visitor's "email" field (Web3Forms default reply-to).
+ */
+---
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Contact · AI LABORATORY™ consulting services</div>
+      <h2 class="section-title">Let's build something</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-offer">Available for AI consulting. If you or your company has a problem worth solving with AI, I'd like to hear about it.</p>
+        <div class="contact-links">
+          <a href={SITE.linkedin} target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8.34 17V10.2H6.06V17zM7.2 9.24a1.32 1.32 0 1 0 0-2.64 1.32 1.32 0 0 0 0 2.64zM18 17v-3.73c0-2-.43-3.53-2.76-3.53a2.42 2.42 0 0 0-2.18 1.2h-.03V10.2H10.8V17h2.27v-3.36c0-.89.17-1.75 1.27-1.75s1.1 1 1.1 1.8V17z"/></svg>
+            LinkedIn — Daniel Stroup
+          </a>
+          <a href={SITE.youtube} target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.74a2.5 2.5 0 0 0-1.76-1.76C19.3 5.1 12 5.1 12 5.1s-7.3 0-8.84.4A2.5 2.5 0 0 0 1.4 7.26C1 8.8 1 12 1 12s0 3.2.4 4.74a2.5 2.5 0 0 0 1.76 1.76c1.54.4 8.84.4 8.84.4s7.3 0 8.84-.4a2.5 2.5 0 0 0 1.76-1.76C23 15.2 23 12 23 12zM9.75 15.02V8.98L15.5 12z"/></svg>
+            YouTube — AI Laboratory
+          </a>
+        </div>
+      </div>
+
+      <form class="form" action={SITE.contactFormAction} method="POST">
+        <input type="hidden" name="access_key" value={SITE.contactFormKey}>
+        <input type="hidden" name="subject" value={SITE.contactFormSubject}>
+        <input type="hidden" name="from_name" value={SITE.contactFormFromName}>
+        <input type="hidden" name="redirect" value={SITE.contactFormRedirect}>
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" type="text" name="name" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" required>
+        </div>
+        <div>
+          <label for="project">What are you trying to build?</label>
+          <textarea id="project" name="message" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Send Inquiry <span class="arr">→</span></button>
+        <p id="inquiry-sent" class="form-sent" role="status" tabindex="-1">Thanks — your inquiry was sent.</p>
+      </form>
+    </div>
+  </div>
+</section>

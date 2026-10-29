@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import { SITE } from '../data/site';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Root-relative path of this page, e.g. "/" or "/work/follow-me-wagon/". */
+  path?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  ogType?: 'website' | 'article';
+  /** True on the homepage, where nav links are in-page anchors. */
+  home?: boolean;
+}
+
+const {
+  title = SITE.title,
+  description = SITE.description,
+  path = '/',
+  ogImage = SITE.ogImage,
+  ogImageAlt = SITE.ogImageAlt,
+  ogType = 'website',
+  home = false,
+} = Astro.props;
+
+const canonical = new URL(path, Astro.site ?? SITE.url).href;
+const image = new URL(ogImage, Astro.site ?? SITE.url).href;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+<link rel="icon" type="image/png" href="/assets/ai-laboratory-mark.png">
+<meta property="og:site_name" content={SITE.name}>
+<meta property="og:type" content={ogType}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={image}>
+<meta property="og:image:alt" content={ogImageAlt}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={image}>
+<meta name="twitter:image:alt" content={ogImageAlt}>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<Nav home={home} />
+
+<span id="top"></span>
+
+<slot />
+
+<Footer />
+
+<script is:inline>
+function toggleCard(head){
+  var card = head.closest('.card');
+  card.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
