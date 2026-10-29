@@ -1,11 +1,60 @@
 ---
 /**
- * Consulting section: placeholder for the LAB-3 consulting copy.
- *
- * LAB-3 is drafted separately on the single-page site (PR #1) and lands first.
- * When it merges, port its "#consulting" section markup into this component
- * (rendered right after the hero) and its after-the-case-studies CTA band into
- * ConsultingCta.astro. Until then both render nothing, so the page matches the
- * live site exactly.
+ * Consulting section (LAB-3), rendered right after the hero. Ported unchanged
+ * from the merged single-page site (PR #1). "Available for AI consulting" must
+ * stay: it is the AI LABORATORY trademark specimen.
  */
 ---
+<section class="section" id="consulting">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">AI Laboratory · AI Consulting</div>
+      <h2 class="section-title">Available for AI consulting</h2>
+      <p class="section-lead">Making your ideas into reality — from hypothesis to working result. I help people and small teams get there with AI, the same way every project on this page was built.</p>
+    </div>
+
+    <div class="offer-grid">
+      <div class="offer">
+        <h3>Agentic AI &amp; multi-agent systems</h3>
+        <p>Design and build of multi-agent setups: specialized agents, an orchestrator directing the work, and quality control built into the process rather than bolted on after.</p>
+        <div class="offer-proof"><span>See</span>Multi-Agent Product Viability System · agent systems for book publishing and content workflows</div>
+      </div>
+      <div class="offer">
+        <h3>AI for authors &amp; creative work</h3>
+        <p>Using AI to carry a creative project to a finished, published result — structured drafting and editing workflows, an author website, and honest testing of AI image tools.</p>
+        <div class="offer-proof"><span>See</span>The Red Omen · luminariexpanse.com · Digital Comic Book with AI</div>
+      </div>
+      <div class="offer">
+        <h3>AI-assisted build projects</h3>
+        <p>Apps, websites, and working prototypes built with AI as the expert guide — from a structured spec through a working first version to a refined product.</p>
+        <div class="offer-proof"><span>See</span>Life Maintenance App · Follow-Me Wagon · luminariexpanse.com</div>
+      </div>
+      <div class="offer">
+        <h3>AI workflows &amp; analysis</h3>
+        <p>Automating the parts of a workflow that stall it, and AI-assisted analysis where every claim is traceable to a source and verified by a human.</p>
+        <div class="offer-proof"><span>See</span>AI Laboratory Podcast · Forensic Financial Audit</div>
+      </div>
+    </div>
+
+    <div class="consult-sub">Who it's for</div>
+    <div class="forwho">
+      <div><b>Authors &amp; creators</b>Writers and creators who want AI working across their publishing, content, and online presence.</div>
+      <div><b>Small teams &amp; companies</b>Teams with a problem worth solving with AI and a need for a working result, not a demo.</div>
+      <div><b>New-territory projects</b>Anyone with an idea outside their wheelhouse — every project here started that way.</div>
+    </div>
+
+    <div class="consult-sub">How it works</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h4>Intro conversation</h4><p>Tell me what you're trying to build and what's in the way.</p></div>
+      <div class="step"><div class="step-num">02</div><h4>Scope</h4><p>Think hard before building: define the goal, the bar for success, and what's in and out.</p></div>
+      <div class="step"><div class="step-num">03</div><h4>Build</h4><p>Use AI as an expert guide, verify everything, and keep quality control inside the process.</p></div>
+      <div class="step"><div class="step-num">04</div><h4>Test &amp; Validate</h4><p>Validate against your expectations, so you get what you meant.</p></div>
+      <div class="step"><div class="step-num">05</div><h4>Handoff</h4><p>Finish, and document the result so you can run with it.</p></div>
+    </div>
+
+    <div class="consult-cta">
+      <a class="btn btn-primary" href="#contact">Request a Consultation <span class="arr">→</span></a>
+      <span class="note">Start with a short note about your project.</span>
+    </div>
+  </div>
+</section>

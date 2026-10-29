@@ -19,16 +19,17 @@ const studies = await getCaseStudies();
       <div class="section-head">
         <div class="section-eyebrow">The Work</div>
         <h2 class="section-title">Projects, start to finish</h2>
-        <p class="section-lead">Each project began with no prior experience in its field. Tap any card to open the full case study.</p>
+        <p class="section-lead">Each project took on a new field — the unfamiliar, made familiar. Tap any card to open the full case study.</p>
       </div>
 
       <div class="cards">
         {studies.map((entry) => <CaseStudyCard entry={entry} />)}
       </div>
+
+      <ConsultingCta />
     </div>
   </section>
 
-  <ConsultingCta />
   <About />
   <Contact />
 </BaseLayout>

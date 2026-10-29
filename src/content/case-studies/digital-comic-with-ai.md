@@ -34,8 +34,6 @@ stats:
 links:
   - label: "View the 4-page comic (PDF)"
     href: "/Zombie%20Comic%20Strip.pdf"
-  - label: "Read the full case study"
-    href: "/Comic_Book_Portfolio_Case_Study_1.docx"
 ---
 
 ## What Was Built

@@ -17,10 +17,9 @@ export const SITE = {
   linkedin: 'https://www.linkedin.com/in/daniel-stroup-11010366/',
   youtube: 'https://www.youtube.com/@AI_Laboratory_Desk',
   /**
-   * FormSubmit endpoint for the contact form. This is the same action the
-   * live site uses today. The LAB-3 pull request replaces it with FormSubmit's
-   * random-string alias so the inbox address is no longer in the page source;
-   * when porting LAB-3, change only this value.
+   * FormSubmit endpoint for the contact form: FormSubmit's random-string
+   * alias (from its activation email), so the inbox address does not appear
+   * in the page source. Same action as the live site.
    */
-  contactFormAction: 'https://formsubmit.co/ailaboratorydesk@gmail.com',
+  contactFormAction: 'https://formsubmit.co/a9ce8bb5bde497b7782e9139372c8510',
 } as const;

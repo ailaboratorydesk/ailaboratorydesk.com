@@ -188,6 +188,33 @@ a{color:var(--accent);text-decoration:none}
 .cs-evidence a:hover{border-color:var(--accent);background:var(--accent-dim)}
 .cs-signoff{margin-top:22px;font-family:var(--display);font-style:italic;font-weight:500;font-size:16px;color:var(--text);line-height:1.6;border-left:2px solid var(--accent);padding-left:16px}
 
+/* ===== CONSULTING ===== */
+.hero-avail{display:inline-flex;align-items:center;gap:9px;margin-top:30px;font-size:14px;font-weight:500;letter-spacing:.03em;color:var(--text-muted)}
+.hero-avail .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px 1px rgba(34,211,238,.6)}
+.hero-avail b{color:var(--text);font-weight:600}
+.offer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.offer{background:var(--bg-raised);border:1px solid var(--rule-soft);border-radius:16px;padding:26px 28px;transition:border-color .25s}
+.offer:hover{border-color:var(--rule)}
+.offer h3{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.01em;margin-bottom:8px}
+.offer p{color:#cdd9e0;font-size:15px;line-height:1.65}
+.offer .offer-proof{margin-top:12px;font-size:13px;color:var(--text-muted);line-height:1.55}
+.offer .offer-proof span{color:var(--accent);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:11px;margin-right:6px}
+.consult-sub{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:46px 0 16px}
+.forwho{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.forwho div{border-left:2px solid var(--accent);padding:4px 0 4px 16px;color:#cdd9e0;font-size:15px;line-height:1.65}
+.forwho b{display:block;color:var(--text);font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:4px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:#0e1c25}
+.step{padding:20px 18px 22px;border-right:1px solid var(--rule-soft)}
+.step:last-child{border-right:none}
+.step-num{font-family:var(--display);font-weight:600;color:var(--accent);font-size:13px;letter-spacing:.12em;margin-bottom:6px}
+.step h4{font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:6px}
+.step p{font-size:14px;color:var(--text-muted);line-height:1.6}
+.consult-cta{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.consult-cta .note{color:var(--text-muted);font-size:14.5px}
+.cta-band{margin-top:44px;border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:14px;padding:28px 30px;background:var(--bg-raised);display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta-band h3{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:4px}
+.cta-band p{color:var(--text-muted);font-size:15px;max-width:58ch}
+
 /* ===== ABOUT ===== */
 .about{max-width:760px}
 .about p{font-size:17.5px;line-height:1.8;color:#cdd9e0;margin-bottom:22px}
@@ -222,6 +249,17 @@ a{color:var(--accent);text-decoration:none}
   .card-body-inner{padding:8px 20px 26px}
   .contact-grid{grid-template-columns:1fr;gap:34px}
   .hero{padding:64px 0 60px}
+  .offer-grid,.forwho{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:none;border-bottom:1px solid var(--rule-soft);padding:16px 20px 18px}
+  .step:last-child{border-bottom:none}
+  .offer{padding:22px}
+  .cta-band{padding:24px 22px}
+}
+@media(max-width:520px){
+  .nav-inner{flex-wrap:wrap;row-gap:10px;padding:12px 20px}
+  .nav-links{width:100%;justify-content:space-between;gap:10px}
+  .nav-links a{font-size:12.5px;letter-spacing:.03em}
 }
 
 /* ===== CASE STUDY PAGES (/work/<slug>/) ===== */
