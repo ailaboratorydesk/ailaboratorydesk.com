@@ -3,7 +3,8 @@ import { SITE } from '../data/site';
 /*
  * Contact section. "Available for AI consulting" and a working contact route
  * must stay: this is the AI LABORATORY trademark specimen. The form posts to
- * FormSubmit (static site, no server); set the endpoint in src/data/site.ts.
+ * Web3Forms (static site, no server); set the endpoint and fields in src/data/site.ts.
+ * Replies go to the visitor's "email" field (Web3Forms default reply-to).
  */
 ---
 <section class="section" id="contact">
@@ -28,9 +29,11 @@ import { SITE } from '../data/site';
       </div>
 
       <form class="form" action={SITE.contactFormAction} method="POST">
-        <input type="hidden" name="_subject" value="New consultation inquiry — AI Laboratory">
-        <input type="hidden" name="_captcha" value="true">
-        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="access_key" value={SITE.contactFormKey}>
+        <input type="hidden" name="subject" value={SITE.contactFormSubject}>
+        <input type="hidden" name="from_name" value={SITE.contactFormFromName}>
+        <input type="hidden" name="redirect" value={SITE.contactFormRedirect}>
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div>
           <label for="name">Name</label>
           <input id="name" type="text" name="name" required>
@@ -44,6 +47,7 @@ import { SITE } from '../data/site';
           <textarea id="project" name="message" required></textarea>
         </div>
         <button class="btn btn-primary" type="submit">Send Inquiry <span class="arr">→</span></button>
+        <p id="inquiry-sent" class="form-sent" role="status" tabindex="-1">Thanks — your inquiry was sent.</p>
       </form>
     </div>
   </div>

@@ -238,6 +238,9 @@ a{color:var(--accent);text-decoration:none}
 .form input:focus,.form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
 .form textarea{resize:vertical;min-height:120px}
 .form .btn-primary{justify-content:center;margin-top:4px}
+.form-sent{display:none;margin:0;padding:12px 14px;border:1px solid var(--accent);border-radius:8px;color:#cdd9e0;font-size:15px;line-height:1.5}
+.form-sent:target{display:block}
+.form-sent:focus{outline:none}
 
 /* ===== FOOTER ===== */
 .footer{border-top:1px solid var(--rule-soft);padding:30px 0;text-align:center;color:var(--text-muted);font-size:13.5px;letter-spacing:.03em}

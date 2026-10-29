@@ -17,9 +17,15 @@ export const SITE = {
   linkedin: 'https://www.linkedin.com/in/daniel-stroup-11010366/',
   youtube: 'https://www.youtube.com/@AI_Laboratory_Desk',
   /**
-   * FormSubmit endpoint for the contact form: FormSubmit's random-string
-   * alias (from its activation email), so the inbox address does not appear
-   * in the page source. Same action as the live site.
+   * Web3Forms endpoint for the contact form (static site, no server).
+   * The access key is public by design (an alias for the inbox, not a secret),
+   * so the inbox address does not appear in the page source.
+   * Replace the placeholder with the real access key before merging.
    */
-  contactFormAction: 'https://formsubmit.co/a9ce8bb5bde497b7782e9139372c8510',
+  contactFormAction: 'https://api.web3forms.com/submit',
+  contactFormKey: 'WEB3FORMS_ACCESS_KEY_PLACEHOLDER',
+  contactFormSubject: 'New consultation inquiry — AI Laboratory',
+  contactFormFromName: 'AI Laboratory website',
+  /** Same-domain redirect after a successful submit (free plan); shows the #inquiry-sent message. */
+  contactFormRedirect: 'https://www.ailaboratorydesk.com/#inquiry-sent',
 } as const;

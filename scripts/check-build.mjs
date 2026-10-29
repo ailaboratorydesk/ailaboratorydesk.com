@@ -27,8 +27,12 @@ else {
   const home = read('index.html');
   // Trademark specimen: the offer and a working contact route must stay.
   if (!home.includes('Available for AI consulting')) errors.push('homepage lost "Available for AI consulting"');
-  if (!/<form[^>]+action="https:\/\/formsubmit\.co\/[^"]+"[^>]*method="POST"/.test(home))
-    errors.push('homepage contact form (FormSubmit) is missing');
+  if (!/<form[^>]+action="https:\/\/api\.web3forms\.com\/submit"[^>]*method="POST"/.test(home))
+    errors.push('homepage contact form (Web3Forms) is missing');
+  if (!/<input type="hidden" name="access_key" value="[^"]+"/.test(home))
+    errors.push('homepage contact form has no Web3Forms access_key field');
+  else if (home.includes('WEB3FORMS_ACCESS_KEY_PLACEHOLDER'))
+    warnings.push('contact form still uses WEB3FORMS_ACCESS_KEY_PLACEHOLDER; set the real access key in src/data/site.ts before merging');
   if (!home.includes('id="contact"')) errors.push('homepage #contact section is missing');
 }
 
