@@ -251,6 +251,9 @@ a{color:var(--accent);text-decoration:none}
 .form input:focus,.form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
 .form textarea{resize:vertical;min-height:120px}
 .form .btn-primary{justify-content:center;margin-top:4px}
+.form-sent{display:none;margin:0;padding:12px 14px;border:1px solid var(--accent);border-radius:8px;color:#cdd9e0;font-size:15px;line-height:1.5}
+.form-sent:target{display:block}
+.form-sent:focus{outline:none}
 
 /* ===== FOOTER ===== */
 .footer{border-top:1px solid var(--rule-soft);padding:30px 0;text-align:center;color:var(--text-muted);font-size:13.5px;letter-spacing:.03em}
@@ -786,13 +789,16 @@ a{color:var(--accent);text-decoration:none}
       </div>
 
       <!-- CONTACT FORM
-           This form uses FormSubmit.co so a static page (no server) can email you.
-           The action uses FormSubmit's random-string alias (from its activation email)
-           instead of the inbox address, so the email address does not appear in the page source. -->
-      <form class="form" action="https://formsubmit.co/a9ce8bb5bde497b7782e9139372c8510" method="POST">
-        <input type="hidden" name="_subject" value="New consultation inquiry — AI Laboratory">
-        <input type="hidden" name="_captcha" value="true">
-        <input type="hidden" name="_template" value="table">
+           This form uses Web3Forms (https://web3forms.com) so a static page (no server) can email you.
+           The access_key is public by design (an alias for the inbox, not a secret), so the email
+           address does not appear in the page source. Replies go to the visitor's "email" field (Web3Forms default).
+           After a successful submit, Web3Forms redirects back to #inquiry-sent (same-domain redirect, free plan). -->
+      <form class="form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="74583bb6-eeb8-4f5c-91c9-2d077e230cf4">
+        <input type="hidden" name="subject" value="New consultation inquiry — AI Laboratory">
+        <input type="hidden" name="from_name" value="AI Laboratory website">
+        <input type="hidden" name="redirect" value="https://www.ailaboratorydesk.com/#inquiry-sent">
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div>
           <label for="name">Name</label>
           <input id="name" type="text" name="name" required>
@@ -806,6 +812,7 @@ a{color:var(--accent);text-decoration:none}
           <textarea id="project" name="message" required></textarea>
         </div>
         <button class="btn btn-primary" type="submit">Send Inquiry <span class="arr">→</span></button>
+        <p id="inquiry-sent" class="form-sent" role="status" tabindex="-1">Thanks — your inquiry was sent.</p>
       </form>
     </div>
   </div>
