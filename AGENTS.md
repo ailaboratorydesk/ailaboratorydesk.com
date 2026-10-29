@@ -48,7 +48,6 @@ docs/case-study-template.md   copy this to add a case study
 scripts/check-build.mjs       post-build checks on dist/
 scripts/check-security.mjs    secret / personal-data scan of tracked files
 .github/workflows/deploy.yml  CI build on PRs; deploy to Pages on push to main
-                              (until moved there, parked at docs/deploy-workflow.yml)
 ```
 
 ## Add a case study
@@ -88,10 +87,6 @@ If a Markdown/plugin change does not show up, clear the caches: `rm -rf .astro n
 `.github/workflows/deploy.yml` builds every pull request (no deploy) and, on a push to `main`
 (i.e. when Daniel merges a PR) or a manual run on `main`, uploads `dist/` with
 `actions/upload-pages-artifact` and publishes it with `actions/deploy-pages`.
-
-Until it is moved into place, the workflow is parked at `docs/deploy-workflow.yml` (pushing
-workflow files needs a GitHub token with the `workflow` scope); move it with
-`git mv docs/deploy-workflow.yml .github/workflows/deploy.yml` before merging.
 
 This only works when **Settings → Pages → Build and deployment → Source** is **GitHub Actions**.
 `public/CNAME` keeps the custom domain `www.ailaboratorydesk.com`; DNS stays at GoDaddy, unchanged.
