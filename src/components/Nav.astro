@@ -1,0 +1,19 @@
+---
+interface Props { home?: boolean }
+const { home = false } = Astro.props;
+const base = home ? '' : '/';
+---
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href={home ? '#top' : '/'}>
+      <img src="/assets/ai-laboratory-mark.png" alt="AI Laboratory">
+      <span>AI Laboratory</span>
+    </a>
+    <div class="nav-links">
+      <a href={`${base}#work`}>Work</a>
+      <a href={`${base}#about`}>About</a>
+      <a href={`${base}#contact`}>Contact</a>
+      {/* Reserved future page link (hidden): <a href="/services">Services</a> */}
+    </div>
+  </div>
+</nav>
