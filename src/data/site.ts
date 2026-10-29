@@ -23,7 +23,7 @@ export const SITE = {
    * Replace the placeholder with the real access key before merging.
    */
   contactFormAction: 'https://api.web3forms.com/submit',
-  contactFormKey: 'WEB3FORMS_ACCESS_KEY_PLACEHOLDER',
+  contactFormKey: '74583bb6-eeb8-4f5c-91c9-2d077e230cf4',
   contactFormSubject: 'New consultation inquiry — AI Laboratory',
   contactFormFromName: 'AI Laboratory website',
   /** Same-domain redirect after a successful submit (free plan); shows the #inquiry-sent message. */
