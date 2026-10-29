@@ -201,6 +201,33 @@ a{color:var(--accent);text-decoration:none}
 .cs-evidence a:hover{border-color:var(--accent);background:var(--accent-dim)}
 .cs-signoff{margin-top:22px;font-family:var(--display);font-style:italic;font-weight:500;font-size:16px;color:var(--text);line-height:1.6;border-left:2px solid var(--accent);padding-left:16px}
 
+/* ===== CONSULTING ===== */
+.hero-avail{display:inline-flex;align-items:center;gap:9px;margin-top:30px;font-size:14px;font-weight:500;letter-spacing:.03em;color:var(--text-muted)}
+.hero-avail .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px 1px rgba(34,211,238,.6)}
+.hero-avail b{color:var(--text);font-weight:600}
+.offer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.offer{background:var(--bg-raised);border:1px solid var(--rule-soft);border-radius:16px;padding:26px 28px;transition:border-color .25s}
+.offer:hover{border-color:var(--rule)}
+.offer h3{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.01em;margin-bottom:8px}
+.offer p{color:#cdd9e0;font-size:15px;line-height:1.65}
+.offer .offer-proof{margin-top:12px;font-size:13px;color:var(--text-muted);line-height:1.55}
+.offer .offer-proof span{color:var(--accent);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:11px;margin-right:6px}
+.consult-sub{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:46px 0 16px}
+.forwho{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.forwho div{border-left:2px solid var(--accent);padding:4px 0 4px 16px;color:#cdd9e0;font-size:15px;line-height:1.65}
+.forwho b{display:block;color:var(--text);font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:4px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:#0e1c25}
+.step{padding:20px 20px 22px;border-right:1px solid var(--rule-soft)}
+.step:last-child{border-right:none}
+.step-num{font-family:var(--display);font-weight:600;color:var(--accent);font-size:13px;letter-spacing:.12em;margin-bottom:6px}
+.step h4{font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:6px}
+.step p{font-size:14px;color:var(--text-muted);line-height:1.6}
+.consult-cta{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.consult-cta .note{color:var(--text-muted);font-size:14.5px}
+.cta-band{margin-top:44px;border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:14px;padding:28px 30px;background:var(--bg-raised);display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta-band h3{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:4px}
+.cta-band p{color:var(--text-muted);font-size:15px;max-width:58ch}
+
 /* ===== ABOUT ===== */
 .about{max-width:760px}
 .about p{font-size:17.5px;line-height:1.8;color:#cdd9e0;margin-bottom:22px}
@@ -235,6 +262,17 @@ a{color:var(--accent);text-decoration:none}
   .card-body-inner{padding:8px 20px 26px}
   .contact-grid{grid-template-columns:1fr;gap:34px}
   .hero{padding:64px 0 60px}
+  .offer-grid,.forwho{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .step:nth-child(2){border-right:none}
+  .step:nth-child(-n+2){border-bottom:1px solid var(--rule-soft)}
+  .offer{padding:22px}
+  .cta-band{padding:24px 22px}
+}
+@media(max-width:520px){
+  .nav-inner{flex-wrap:wrap;row-gap:10px;padding:12px 20px}
+  .nav-links{width:100%;justify-content:space-between;gap:10px}
+  .nav-links a{font-size:12.5px;letter-spacing:.03em}
 }
 </style>
 </head>
@@ -248,6 +286,7 @@ a{color:var(--accent);text-decoration:none}
       <span>AI Laboratory</span>
     </a>
     <div class="nav-links">
+      <a href="#consulting">Consulting</a>
       <a href="#work">Work</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
@@ -266,11 +305,66 @@ a{color:var(--accent);text-decoration:none}
     <h1>From concept to delivery, <span class="glow">executed as intended.</span></h1>
     <p class="hero-context">A published novel, an autonomous robot, a forensic financial audit, and more — each built solo with AI, in a field I'd never worked in before, start to finish.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="#work">View the Work <span class="arr">→</span></a>
-      <a class="btn btn-secondary" href="#contact">Request a Consultation <span class="arr">→</span></a>
+      <a class="btn btn-primary" href="#contact">Request a Consultation <span class="arr">→</span></a>
+      <a class="btn btn-secondary" href="#work">View the Work <span class="arr">→</span></a>
     </div>
+    <div class="hero-avail"><span class="dot"></span><span><b>AI Laboratory: AI consulting</b> · Available for AI consulting</span></div>
   </div>
 </header>
+
+<!-- ===================== CONSULTING ===================== -->
+<section class="section" id="consulting">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">AI Laboratory · AI Consulting</div>
+      <h2 class="section-title">Available for AI consulting</h2>
+      <p class="section-lead">AI Laboratory is my AI consulting practice. I help people and small teams take an idea from concept to something real with AI — the same way every project on this page was built.</p>
+    </div>
+
+    <div class="offer-grid">
+      <div class="offer">
+        <h3>Agentic AI &amp; multi-agent systems</h3>
+        <p>Design and build of multi-agent setups: specialized agents, an orchestrator directing the work, and quality control built into the process rather than bolted on after.</p>
+        <div class="offer-proof"><span>See</span>Multi-Agent Product Viability System · agent systems for book publishing and content workflows</div>
+      </div>
+      <div class="offer">
+        <h3>AI for authors &amp; creative work</h3>
+        <p>Using AI to carry a creative project to a finished, published result — structured drafting and editing workflows, an author website, and honest testing of AI image tools.</p>
+        <div class="offer-proof"><span>See</span>The Red Omen · luminariexpanse.com · Digital Comic Book with AI</div>
+      </div>
+      <div class="offer">
+        <h3>AI-assisted build projects</h3>
+        <p>Apps, websites, and working prototypes built with AI as the expert guide — from a structured spec through a working first version to a refined product.</p>
+        <div class="offer-proof"><span>See</span>Life Maintenance App · Follow-Me Wagon · luminariexpanse.com</div>
+      </div>
+      <div class="offer">
+        <h3>AI workflows &amp; analysis</h3>
+        <p>Automating the parts of a workflow that stall it, and AI-assisted analysis where every claim is traceable to a source and verified by a human.</p>
+        <div class="offer-proof"><span>See</span>AI Laboratory Podcast · Forensic Financial Audit</div>
+      </div>
+    </div>
+
+    <div class="consult-sub">Who it's for</div>
+    <div class="forwho">
+      <div><b>Authors &amp; creators</b>Writers and creators who want AI working across their publishing, content, and online presence.</div>
+      <div><b>Small teams &amp; companies</b>Teams with a problem worth solving with AI and a need for a working result, not a demo.</div>
+      <div><b>New-territory projects</b>Anyone with an idea outside their wheelhouse — every project here started that way.</div>
+    </div>
+
+    <div class="consult-sub">How it works</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h4>Intro conversation</h4><p>Tell me what you're trying to build and what's in the way.</p></div>
+      <div class="step"><div class="step-num">02</div><h4>Scope</h4><p>Think hard before building: define the goal, the bar for success, and what's in and out.</p></div>
+      <div class="step"><div class="step-num">03</div><h4>Build</h4><p>Use AI as an expert guide, verify everything, and keep quality control inside the process.</p></div>
+      <div class="step"><div class="step-num">04</div><h4>Handoff</h4><p>Finish, and document the result so you can run with it.</p></div>
+    </div>
+
+    <div class="consult-cta">
+      <a class="btn btn-primary" href="#contact">Request a Consultation <span class="arr">→</span></a>
+      <span class="note">Start with a short note about your project.</span>
+    </div>
+  </div>
+</section>
 
 <!-- ===================== WORK ===================== -->
 <section class="section" id="work">
@@ -642,6 +736,14 @@ a{color:var(--accent);text-decoration:none}
       <!-- ===== CASE STUDY END: Creating a Digital Comic Book with AI ===== -->
 
     </div>
+
+    <div class="cta-band">
+      <div>
+        <h3>Have a project like these?</h3>
+        <p>AI Laboratory is available for AI consulting. Tell me what you're trying to build.</p>
+      </div>
+      <a class="btn btn-primary" href="#contact">Request a Consultation <span class="arr">→</span></a>
+    </div>
   </div>
 </section>
 
@@ -665,7 +767,7 @@ a{color:var(--accent);text-decoration:none}
 <section class="section" id="contact">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-eyebrow">Contact</div>
+      <div class="section-eyebrow">Contact · AI Laboratory consulting</div>
       <h2 class="section-title">Let's build something</h2>
     </div>
     <div class="contact-grid">
@@ -685,13 +787,9 @@ a{color:var(--accent);text-decoration:none}
 
       <!-- CONTACT FORM
            This form uses FormSubmit.co so a static page (no server) can email you.
-           ONE-TIME SETUP so your email stays hidden from spam bots:
-             1. Submit the form once with the action set to:  https://formsubmit.co/ailaboratorydesk@gmail.com
-             2. Check that inbox and click the FormSubmit activation link.
-             3. FormSubmit emails you a unique alias like:  https://formsubmit.co/el/xxxxxx
-             4. Replace the action="" URL below with that alias URL.
-           After step 4, your real email address never appears anywhere in the page source. -->
-      <form class="form" action="https://formsubmit.co/ailaboratorydesk@gmail.com" method="POST">
+           The action uses FormSubmit's random-string alias (from its activation email)
+           instead of the inbox address, so the email address does not appear in the page source. -->
+      <form class="form" action="https://formsubmit.co/a9ce8bb5bde497b7782e9139372c8510" method="POST">
         <input type="hidden" name="_subject" value="New consultation inquiry — AI Laboratory">
         <input type="hidden" name="_captcha" value="true">
         <input type="hidden" name="_template" value="table">
@@ -714,7 +812,7 @@ a{color:var(--accent);text-decoration:none}
 </section>
 
 <footer class="footer">
-  <div class="wrap">AI Laboratory · Daniel Stroup · Built with AI, start to finish</div>
+  <div class="wrap">AI Laboratory · AI consulting · Daniel Stroup · Built with AI, start to finish</div>
 </footer>
 
 <script>
