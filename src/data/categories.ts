@@ -44,9 +44,10 @@ export const CATEGORIES = [
     featured: 'the-red-omen',
   },
   {
-    slug: 'finance-analysis',
-    name: 'Finance & Analysis',
-    description: 'Citation-backed review of financial records, with every claim traceable to a source.',
+    slug: 'analysis',
+    name: 'Analysis',
+    description: 'AI-assisted analysis of messy source records, delivered with every claim cited to file and page.',
+    image: { src: '/analysis-icon-800.jpg', alt: 'Magnifying glass over documents and data traces', fit: 'contain' },
     icon: 'audit',
     featured: 'financial-audit',
   },

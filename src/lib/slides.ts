@@ -2,8 +2,8 @@
  * Images for the redesign's project carousel and gallery. Every image is an
  * existing case-study image in public/ (no new artwork). The Red Omen uses a
  * resized copy of its cover (red-omen-cover-600.jpg) instead of the 1.9 MB original.
- * Studies with `placeholder: true` have no photo yet and show their icon on a
- * styled panel (Forensic Financial Audit).
+ * Studies with `placeholder: true` show their icon on a styled panel instead of
+ * an image (none at present; the Forensic Financial Audit uses analysis-icon-800.jpg).
  */
 import type { CaseStudy } from './case-studies';
 
@@ -19,7 +19,6 @@ export interface SlideImage {
 
 const OVERRIDES: Record<string, Partial<SlideImage>> = {
   'the-red-omen': { src: '/red-omen-cover-600.jpg', fit: 'contain' },
-  'financial-audit': { src: undefined, placeholder: true },
   'multi-agent-viability-system': { pos: 'top center' },
   'ai-laboratory-podcast': { pos: 'top center' },
   'luminariexpanse': { pos: 'center' },

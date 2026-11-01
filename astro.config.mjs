@@ -8,6 +8,10 @@ export default defineConfig({
   output: 'static',
   build: { format: 'directory' },
   devToolbar: { enabled: false },
+  // Renamed URLs keep working (a static page with a meta refresh and canonical link).
+  redirects: {
+    '/work/category/finance-analysis/': '/work/category/analysis/',
+  },
   markdown: {
     syntaxHighlight: false,
     processor: unified({
