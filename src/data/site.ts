@@ -24,8 +24,8 @@ export const SITE = {
    */
   contactFormAction: 'https://api.web3forms.com/submit',
   contactFormKey: '74583bb6-eeb8-4f5c-91c9-2d077e230cf4',
-  contactFormSubject: 'New consultation inquiry — AI Laboratory',
-  contactFormFromName: 'AI Laboratory website',
+  contactFormSubject: 'New consultation inquiry — AI LABORATORY™',
+  contactFormFromName: 'AI LABORATORY™ website',
   /** Same-domain redirect after a successful submit (free plan); shows the #inquiry-sent message. */
   contactFormRedirect: 'https://www.ailaboratorydesk.com/#inquiry-sent',
 } as const;
