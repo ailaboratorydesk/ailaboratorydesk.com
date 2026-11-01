@@ -1,0 +1,26 @@
+{
+  "name": "ailaboratorydesk-site",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "AI Laboratory (www.ailaboratorydesk.com), built with Astro",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test:security": "node scripts/check-security.mjs",
+    "test": "npm run check && npm run build && node scripts/check-build.mjs && npm run test:security"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.5",
+    "astro": "^7.4.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^5.9.3"
+  }
+}

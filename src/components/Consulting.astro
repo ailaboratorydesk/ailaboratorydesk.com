@@ -1,0 +1,89 @@
+---
+/**
+ * Consulting section (LAB-3), rendered right after the hero. Ported unchanged
+ * from the merged single-page site (PR #1). "Available for AI consulting" must
+ * stay: it is the AI LABORATORY trademark specimen.
+ *
+ * Each project named in a "See" line links to its /work/<slug>/ page with a
+ * small thumbnail taken from that case study's `cover` image. Studies whose
+ * cover is the site logo use their card icon instead (see ICON_THUMB).
+ */
+import { getCaseStudies } from '../lib/case-studies';
+
+const studies = new Map((await getCaseStudies()).map((s) => [s.id, s]));
+/** Studies shown with their card icon rather than the cover image. */
+const ICON_THUMB: Record<string, string> = {
+  'financial-audit': `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v8"/><path d="M14 3v4h4"/><path d="M6 13h5"/><path d="M6 16.5h3"/><circle cx="15.5" cy="17.5" r="3"/><path d="M17.8 19.8 21 23"/></svg>`,
+};
+const THUMB_SRC: Record<string, string> = {
+  'the-red-omen': '/red-omen-thumb.jpg',
+};
+const link = (slug: string) => {
+  const s = studies.get(slug);
+  if (!s) throw new Error(`Consulting.astro: no case study "${slug}"`);
+  return { href: `/work/${slug}/`, src: THUMB_SRC[slug] ?? s.data.cover.src, icon: ICON_THUMB[slug] };
+};
+const L = {
+  mavs: link('multi-agent-viability-system'),
+  omen: link('the-red-omen'),
+  lux: link('luminariexpanse'),
+  comic: link('digital-comic-with-ai'),
+  lma: link('life-maintenance-app'),
+  wagon: link('follow-me-wagon'),
+  pod: link('ai-laboratory-podcast'),
+  audit: link('financial-audit'),
+};
+---
+<section class="section" id="consulting">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">AI LABORATORY™ consulting services</div>
+      <h2 class="section-title">Available for AI consulting</h2>
+      <p class="section-lead">Making your ideas into reality — from first idea to working result. I help people and small teams get there with AI, the same way every project on this page was built.</p>
+    </div>
+
+    <div class="offer-grid">
+      <div class="offer">
+        <h3>Agentic AI &amp; multi-agent systems</h3>
+        <p>Design and build of multi-agent setups: specialized agents, an orchestrator directing the work, and quality control built into the process rather than bolted on after.</p>
+        <div class="offer-proof"><span>See</span><a class="case-link" href={L.mavs.href}><b class="cl-nw">{L.mavs.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.mavs.icon} /> : <img src={L.mavs.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}Multi-Agent</b> Product Viability System</a> · agent systems for book publishing and content workflows</div>
+      </div>
+      <div class="offer">
+        <h3>AI for authors &amp; creative work</h3>
+        <p>Using AI to carry a creative project to a finished, published result — structured drafting and editing workflows, an author website, and honest testing of AI image tools.</p>
+        <div class="offer-proof"><span>See</span><a class="case-link" href={L.omen.href}><b class="cl-nw">{L.omen.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.omen.icon} /> : <img src={L.omen.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}The</b> Red Omen</a> · <a class="case-link" href={L.lux.href}><b class="cl-nw">{L.lux.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.lux.icon} /> : <img src={L.lux.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}luminariexpanse.com</b></a> · <a class="case-link" href={L.comic.href}><b class="cl-nw">{L.comic.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.comic.icon} /> : <img src={L.comic.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}Digital</b> Comic Book with AI</a></div>
+      </div>
+      <div class="offer">
+        <h3>AI-assisted build projects</h3>
+        <p>Apps, websites, and working prototypes built with AI as the expert guide — from a structured spec through a working first version to a refined product.</p>
+        <div class="offer-proof"><span>See</span><a class="case-link" href={L.lma.href}><b class="cl-nw">{L.lma.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.lma.icon} /> : <img src={L.lma.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}Life</b> Maintenance App</a> · <a class="case-link" href={L.wagon.href}><b class="cl-nw">{L.wagon.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.wagon.icon} /> : <img src={L.wagon.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}Follow-Me</b> Wagon</a> · <a class="case-link" href={L.lux.href}><b class="cl-nw">{L.lux.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.lux.icon} /> : <img src={L.lux.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}luminariexpanse.com</b></a></div>
+      </div>
+      <div class="offer">
+        <h3>AI workflows &amp; analysis</h3>
+        <p>Automating the parts of a workflow that stall it, and AI-assisted analysis where every claim is traceable to a source and verified by a human.</p>
+        <div class="offer-proof"><span>See</span><a class="case-link" href={L.pod.href}><b class="cl-nw">{L.pod.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.pod.icon} /> : <img src={L.pod.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}AI</b> Laboratory Podcast</a> · <a class="case-link" href={L.audit.href}><b class="cl-nw">{L.audit.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.audit.icon} /> : <img src={L.audit.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}Forensic</b> Financial Audit</a></div>
+      </div>
+    </div>
+
+    <div class="consult-sub">Who it's for</div>
+    <div class="forwho">
+      <div><b>Authors &amp; creators</b>Writers and creators who want AI working across their publishing, content, and online presence.</div>
+      <div><b>Small teams &amp; companies</b>Teams with a problem worth solving with AI and a need for a working result, not a demo.</div>
+      <div><b>New-territory projects</b>Anyone with an idea outside their wheelhouse — every project here started that way.</div>
+    </div>
+
+    <div class="consult-sub">How it works</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h4>Intro conversation</h4><p>Tell me what you're trying to build and what's in the way.</p></div>
+      <div class="step"><div class="step-num">02</div><h4>Scope</h4><p>Think hard before building: define the goal, the bar for success, and what's in and out.</p></div>
+      <div class="step"><div class="step-num">03</div><h4>Build</h4><p>Use AI as an expert guide, verify everything, and keep quality control inside the process.</p></div>
+      <div class="step"><div class="step-num">04</div><h4>Review &amp; Verify</h4><p>Check the result against your goals, so you get what you meant.</p></div>
+      <div class="step"><div class="step-num">05</div><h4>Handoff</h4><p>Finish, and document the result so you can run with it.</p></div>
+    </div>
+
+    <div class="consult-cta">
+      <a class="btn btn-primary" href="#contact">Request a Consultation <span class="arr">→</span></a>
+      <span class="note">Start with a short note about your project.</span>
+    </div>
+  </div>
+</section>

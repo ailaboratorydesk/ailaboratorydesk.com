@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import { getCaseStudies, type CaseStudy } from '../../lib/case-studies';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  const studies = await getCaseStudies();
+  return studies.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+interface Props { entry: CaseStudy }
+const { entry } = Astro.props;
+const d = entry.data;
+---
+<BaseLayout
+  title={`${d.title} — ${SITE.name} — ${SITE.author}`}
+  description={d.oneLiner}
+  path={`/work/${entry.id}/`}
+  ogImage={d.cover.src}
+  ogImageAlt={d.cover.alt}
+  ogType="article"
+>
+  <main class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Case Study</div>
+      </div>
+      <CaseStudyCard entry={entry} mode="page" />
+      <div class="cs-page-actions">
+        <a class="btn btn-secondary" href="/#work"><span class="arr">←</span> All projects</a>
+        <a class="btn btn-primary" href="/#contact">Request a Consultation <span class="arr">→</span></a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
