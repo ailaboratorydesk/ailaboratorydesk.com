@@ -5,6 +5,8 @@ date: "2025"
 order: 4
 domains:
   - "Software"
+categories:
+  - "software-apps"
 tools:
   - "Claude"
   - "Replit"

@@ -6,6 +6,9 @@ order: 6
 domains:
   - "Software"
   - "Writing"
+categories:
+  - "writing-publishing"
+  - "software-apps"
 tools:
   - "WordPress"
   - "Claude"

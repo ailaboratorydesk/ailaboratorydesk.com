@@ -9,6 +9,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { CATEGORY_SLUGS } from './data/categories';
 
 /** Domains double as the future filter chips (see the redesign plan). */
 export const DOMAINS = ['Writing', 'Hardware', 'Software', 'Analysis', 'Media', 'AI systems'] as const;
@@ -100,6 +101,10 @@ const caseStudies = defineCollection({
       order: z.int().min(1).max(999),
       /** One or more domains from DOMAINS. */
       domains: z.array(z.enum(DOMAINS)).min(1).refine((a) => new Set(a).size === a.length, 'no duplicate domains'),
+      /** One or more category slugs from src/data/categories.ts (drives the home grid, category pages and library). */
+      categories: z.array(z.enum(CATEGORY_SLUGS)).min(1).refine((a) => new Set(a).size === a.length, 'no duplicate categories'),
+      /** Optional search keywords for the library (tools are searched too). */
+      tags: z.array(text(1, 40)).default([]),
       /** Main tools and platforms used. */
       tools: z.array(text(1, 60)).min(1),
       /** Pin to the featured row in the upcoming redesign. */

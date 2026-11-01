@@ -6,6 +6,9 @@ date: "2025"
 order: 8
 domains:
   - "Media"
+categories:
+  - "writing-publishing"
+  - "media-content"
 tools:
   - "Grok"
   - "ChatGPT"

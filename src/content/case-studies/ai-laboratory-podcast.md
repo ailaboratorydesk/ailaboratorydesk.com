@@ -5,6 +5,8 @@ date: "2025"
 order: 7
 domains:
   - "Media"
+categories:
+  - "media-content"
 tools:
   - "Claude"
   - "Yardstream"

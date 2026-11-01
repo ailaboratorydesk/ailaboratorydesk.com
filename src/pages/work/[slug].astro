@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import StudyCard from '../../components/StudyCard.astro';
 import { getCaseStudies, type CaseStudy } from '../../lib/case-studies';
+import { categoriesOf, categoryHref, relatedTo } from '../../lib/categories';
 import { SITE } from '../../data/site';
 
 export async function getStaticPaths() {
@@ -12,6 +14,9 @@ export async function getStaticPaths() {
 interface Props { entry: CaseStudy }
 const { entry } = Astro.props;
 const d = entry.data;
+const all = await getCaseStudies();
+const cats = categoriesOf(entry);
+const related = relatedTo(entry, all);
 ---
 <BaseLayout
   title={`${d.title} — ${SITE.name} — ${SITE.author}`}
@@ -25,10 +30,20 @@ const d = entry.data;
     <div class="wrap">
       <div class="section-head">
         <div class="section-eyebrow">Case Study</div>
+        <div class="cs-cats" aria-label="Categories">{cats.map((c) => <a class="chip-link" href={categoryHref(c.slug)}>{c.name}</a>)}</div>
       </div>
       <CaseStudyCard entry={entry} mode="page" />
+      {related.length > 0 && (
+        <section class="related" aria-labelledby="related-h">
+          <div class="related-head">
+            <h2 class="consult-sub" id="related-h">Related projects</h2>
+            <a class="work-all" href="/work/">Browse all {all.length} projects <span class="arr">→</span></a>
+          </div>
+          <div class="related-row">{related.map((s) => <StudyCard study={s} size="sm" />)}</div>
+        </section>
+      )}
       <div class="cs-page-actions">
-        <a class="btn btn-secondary" href="/#work"><span class="arr">←</span> All projects</a>
+        <a class="btn btn-secondary" href="/work/"><span class="arr">←</span> All projects</a>
         <a class="btn btn-primary" href="/#contact">Request a Consultation <span class="arr">→</span></a>
       </div>
     </div>

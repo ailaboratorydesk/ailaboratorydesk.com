@@ -5,6 +5,8 @@ date: "2025"
 order: 3
 domains:
   - "Analysis"
+categories:
+  - "finance-analysis"
 tools:
   - "NotebookLM"
   - "Claude"

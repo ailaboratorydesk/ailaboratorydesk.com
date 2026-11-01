@@ -1,0 +1,127 @@
+---
+/**
+ * Featured-project carousel: one large tile at a time with the case study's
+ * image, its category name, title and one-liner. Left/right arrow buttons, dot or
+ * thumbnail indicators, keyboard arrows, swipe on touch screens. Clicking a
+ * tile opens /work/<slug>/. Without JavaScript the track scrolls sideways
+ * with scroll-snap, so every tile stays reachable.
+ */
+import type { CaseStudy } from '../lib/case-studies';
+import { slideImage } from '../lib/slides';
+import CaseStudyIcon from './CaseStudyIcon.astro';
+
+interface Props {
+  studies: CaseStudy[];
+  /** 'dots' = dot indicators; 'thumbs' = a strip of small thumbnails. */
+  indicators?: 'dots' | 'thumbs';
+  /** Prefix shown before the slide counter, e.g. "Fig." */
+  counterLabel?: string;
+  /** Optional label per slide (e.g. the category name); defaults to the study's domains. */
+  labels?: string[];
+  /** Accessible name of the carousel. */
+  label?: string;
+}
+const { studies, indicators = 'dots', counterLabel = '', labels, label = 'Projects' } = Astro.props;
+const n = studies.length;
+const pad = (i: number) => String(i).padStart(2, '0');
+const slides = studies.map((s) => ({ s, img: slideImage(s) }));
+---
+<div class={`pc pc-${indicators}`} data-carousel role="region" aria-roledescription="carousel" aria-label={label} tabindex="0">
+  <div class="pc-stage">
+    <div class="pc-viewport">
+      <div class="pc-track">
+        {slides.map(({ s, img }, i) => (
+          <a class="pc-slide" href={`/work/${s.id}/`} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}: ${s.data.title}`} data-index={i} draggable="false">
+            <div class:list={['pc-media', { 'pc-ph': img.placeholder, 'pc-contain': img.fit === 'contain' }]}>
+              {img.placeholder ? (
+                <div class="pc-ph-inner"><CaseStudyIcon name={s.data.icon} /><span>{s.data.title}</span></div>
+              ) : (
+                <img src={img.src} alt={img.alt} style={`object-position:${img.pos}`} loading={i < 2 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+              )}
+            </div>
+            <div class="pc-text">
+              <div class="pc-meta"><span class="pc-count">{counterLabel}{counterLabel ? ' ' : ''}{pad(i + 1)} / {pad(n)}</span><span class="pc-domains">{labels?.[i] ?? s.data.domains.join(' · ')}</span></div>
+              <h3 class="pc-title">{s.data.title}</h3>
+              <p class="pc-line">{s.data.oneLiner}</p>
+              <span class="pc-open">Open the case study <span class="arr">→</span></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+    <button class="pc-btn pc-prev" type="button" aria-label="Previous project" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button class="pc-btn pc-next" type="button" aria-label="Next project" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+  </div>
+  <div class="pc-dots" role="group" aria-label="Choose a project" hidden>
+    {slides.map(({ s, img }, i) => (
+      <button type="button" class="pc-dot" data-go={i} aria-label={`Show project ${i + 1}: ${s.data.title}`} aria-current={i === 0 ? 'true' : undefined}>
+        {indicators === 'thumbs' && (img.placeholder ? <CaseStudyIcon name={s.data.icon} /> : <img src={s.id === 'the-red-omen' ? '/red-omen-thumb.jpg' : img.src} alt="" loading="lazy" decoding="async" />)}
+      </button>
+    ))}
+  </div>
+  <p class="pc-live" aria-live="polite"></p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('.pc-track')!;
+    const slides = [...root.querySelectorAll<HTMLAnchorElement>('.pc-slide')];
+    const dots = [...root.querySelectorAll<HTMLButtonElement>('.pc-dot')];
+    const prev = root.querySelector<HTMLButtonElement>('.pc-prev')!;
+    const next = root.querySelector<HTMLButtonElement>('.pc-next')!;
+    const live = root.querySelector<HTMLElement>('.pc-live')!;
+    const n = slides.length;
+    let i = 0;
+    root.classList.add('pc-js');
+    prev.hidden = next.hidden = false;
+    root.querySelector<HTMLElement>('.pc-dots')!.hidden = false;
+
+    const go = (to: number, announce = true) => {
+      i = (to + n) % n;
+      track.style.transform = `translateX(${-100 * i}%)`;
+      slides.forEach((s, k) => {
+        const on = k === i;
+        s.setAttribute('aria-hidden', on ? 'false' : 'true');
+        s.tabIndex = on ? 0 : -1;
+      });
+      dots.forEach((d, k) => (k === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
+      const active = dots[i];
+      if (active && root.classList.contains('pc-thumbs')) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      if (announce) live.textContent = slides[i].getAttribute('aria-label') ?? '';
+      root.dataset.index = String(i);
+    };
+    prev.addEventListener('click', () => go(i - 1));
+    next.addEventListener('click', () => go(i + 1));
+    dots.forEach((d) => d.addEventListener('click', () => go(Number(d.dataset.go))));
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(i + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(i - 1); }
+    });
+
+    // Swipe: follow the finger, then snap; a drag never counts as a click.
+    let x0 = 0, y0 = 0, dx = 0, dragging = false, moved = false;
+    const vp = root.querySelector<HTMLElement>('.pc-viewport')!;
+    vp.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      x0 = e.clientX; y0 = e.clientY; dx = 0; dragging = true; moved = false;
+    });
+    vp.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      dx = e.clientX - x0;
+      if (!moved && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(e.clientY - y0)) {
+        moved = true; track.classList.add('pc-dragging'); vp.setPointerCapture(e.pointerId);
+      }
+      if (moved) track.style.transform = `translateX(calc(${-100 * i}% + ${dx}px))`;
+    });
+    const end = () => {
+      if (!dragging) return;
+      dragging = false; track.classList.remove('pc-dragging');
+      if (moved && Math.abs(dx) > vp.clientWidth * 0.15) go(dx < 0 ? i + 1 : i - 1);
+      else go(i, false);
+    };
+    vp.addEventListener('pointerup', end);
+    vp.addEventListener('pointercancel', end);
+    vp.addEventListener('click', (e) => { if (moved) { e.preventDefault(); moved = false; } }, true);
+    go(0, false);
+  });
+</script>

@@ -5,6 +5,8 @@ date: "2026-01-20"
 order: 2
 domains:
   - "Writing"
+categories:
+  - "writing-publishing"
 tools:
   - "AI prose and editing partner"
   - "Amazon (Kindle + paperback)"

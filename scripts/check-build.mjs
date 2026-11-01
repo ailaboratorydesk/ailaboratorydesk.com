@@ -39,15 +39,10 @@ else {
 const cname = exists('CNAME') ? read('CNAME').trim() : '';
 if (cname !== 'www.ailaboratorydesk.com') errors.push(`dist/CNAME must be "www.ailaboratorydesk.com" (found "${cname}")`);
 
-// Every case study page has its share tags.
-const workDir = path.join(DIST, 'work');
-const slugs = fs.existsSync(workDir) ? fs.readdirSync(workDir) : [];
-if (slugs.length === 0) errors.push('no /work/<slug>/ pages were built');
-for (const slug of slugs) {
-  const file = `work/${slug}/index.html`;
-  if (!exists(file)) { errors.push(`${file} is missing`); continue; }
+// Every page has its share tags.
+function checkShareTags(file, url) {
+  if (!exists(file)) { errors.push(`${file} is missing`); return null; }
   const html = read(file);
-  const url = `${SITE}/work/${slug}/`;
   const need = {
     canonical: `<link rel="canonical" href="${url}">`,
     'og:url': `<meta property="og:url" content="${url}">`,
@@ -59,6 +54,30 @@ for (const slug of slugs) {
   for (const [k, v] of Object.entries(need)) if (!html.includes(v)) errors.push(`${file}: missing or wrong ${k}`);
   const img = html.match(/<meta property="og:image" content="https:\/\/www\.ailaboratorydesk\.com(\/[^"]+)"/);
   if (img && !exists(decodeURIComponent(img[1]))) errors.push(`${file}: og:image ${img[1]} does not exist in dist/`);
+  return html;
+}
+
+// Case study pages: /work/<slug>/ (the library index and /work/category/ are not case studies).
+const workDir = path.join(DIST, 'work');
+const RESERVED = new Set(['index.html', 'category']);
+const slugs = fs.existsSync(workDir) ? fs.readdirSync(workDir).filter((n) => !RESERVED.has(n)) : [];
+if (slugs.length === 0) errors.push('no /work/<slug>/ pages were built');
+for (const slug of slugs) checkShareTags(`work/${slug}/index.html`, `${SITE}/work/${slug}/`);
+
+// Library: lists every case study.
+const lib = checkShareTags('work/index.html', `${SITE}/work/`);
+if (lib) for (const slug of slugs) if (!lib.includes(`href="/work/${slug}/"`)) errors.push(`work/index.html: library does not list ${slug}`);
+
+// Category pages: at least one, none empty, and the homepage links to each one and to the library.
+const catDir = path.join(workDir, 'category');
+const cats = fs.existsSync(catDir) ? fs.readdirSync(catDir) : [];
+if (cats.length === 0) errors.push('no /work/category/<slug>/ pages were built');
+const homeHtml = exists('index.html') ? read('index.html') : '';
+if (!homeHtml.includes('href="/work/"')) errors.push('homepage has no link to the /work/ library');
+for (const c of cats) {
+  const html = checkShareTags(`work/category/${c}/index.html`, `${SITE}/work/category/${c}/`);
+  if (html && !/class="sc[ "]/.test(html)) errors.push(`work/category/${c}/: category page lists no case studies`);
+  if (!homeHtml.includes(`href="/work/category/${c}/"`)) errors.push(`homepage has no tile linking to /work/category/${c}/`);
 }
 
 // Text files: no "Luminary" typo; local links resolve.
@@ -78,5 +97,5 @@ for (const f of walk(DIST).filter((f) => f.endsWith('.html') && !f.endsWith('fol
 
 for (const w of [...new Set(warnings)]) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`ERROR ${e}`);
-console.log(`check-build: ${slugs.length} case study pages, ${errors.length} error(s), ${new Set(warnings).size} warning(s)`);
+console.log(`check-build: ${slugs.length} case study pages, ${cats.length} category pages, ${errors.length} error(s), ${new Set(warnings).size} warning(s)`);
 process.exit(errors.length ? 1 : 0);
