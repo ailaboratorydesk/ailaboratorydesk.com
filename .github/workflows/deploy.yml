@@ -1,7 +1,3 @@
-# PENDING: this file belongs at .github/workflows/deploy.yml. It is parked in docs/ only because
-# the token that pushed this branch lacks GitHub's `workflow` scope. Move it before merging
-# (see AGENTS.md > Deploying and the PR description).
-#
 # Build the Astro site on every pull request; deploy to GitHub Pages only on push to main.
 #
 # Requires Settings > Pages > Build and deployment > Source = "GitHub Actions".
