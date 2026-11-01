@@ -15,10 +15,13 @@ const studies = new Map((await getCaseStudies()).map((s) => [s.id, s]));
 const ICON_THUMB: Record<string, string> = {
   'financial-audit': `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v8"/><path d="M14 3v4h4"/><path d="M6 13h5"/><path d="M6 16.5h3"/><circle cx="15.5" cy="17.5" r="3"/><path d="M17.8 19.8 21 23"/></svg>`,
 };
+const THUMB_SRC: Record<string, string> = {
+  'the-red-omen': '/red-omen-thumb.jpg',
+};
 const link = (slug: string) => {
   const s = studies.get(slug);
   if (!s) throw new Error(`Consulting.astro: no case study "${slug}"`);
-  return { href: `/work/${slug}/`, src: s.data.cover.src, icon: ICON_THUMB[slug] };
+  return { href: `/work/${slug}/`, src: THUMB_SRC[slug] ?? s.data.cover.src, icon: ICON_THUMB[slug] };
 };
 const L = {
   mavs: link('multi-agent-viability-system'),
