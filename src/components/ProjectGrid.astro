@@ -1,0 +1,33 @@
+---
+/**
+ * Bento grid of case studies (Studio redesign mockup). The first study gets a
+ * large 2x2 tile, the second a wide tile, the rest small tiles. Every tile is
+ * a link to /work/<slug>/ and uses the study's existing cover image.
+ */
+import type { CaseStudy } from '../lib/case-studies';
+import { slideImage } from '../lib/slides';
+import CaseStudyIcon from './CaseStudyIcon.astro';
+interface Props { studies: CaseStudy[] }
+const { studies } = Astro.props;
+const DOMAIN_CLASS: Record<string, string> = { Writing: 'd-writing', Hardware: 'd-hardware', Software: 'd-software', Analysis: 'd-analysis', Media: 'd-media', 'AI systems': 'd-ai' };
+---
+<div class="bento">
+  {studies.map((s, i) => {
+    const img = slideImage(s);
+    const size = i === 0 ? 'b-lg' : i === 1 ? 'b-wide' : 'b-sm';
+    return (
+      <a class:list={['bento-tile', size, { 'b-contain': img.fit === 'contain', 'b-ph': img.placeholder }]} href={`/work/${s.id}/`}>
+        <div class="bento-media">
+          {img.placeholder
+            ? <div class="bento-ph"><CaseStudyIcon name={s.data.icon} /></div>
+            : <img src={img.src} alt={img.alt} style={`object-position:${img.pos}`} loading="lazy" decoding="async" />}
+        </div>
+        <div class="bento-text">
+          <div class="bento-chips">{s.data.domains.map((d) => <span class={`chip ${DOMAIN_CLASS[d]}`}>{d}</span>)}</div>
+          <h3>{s.data.title}</h3>
+          {i < 2 && <p>{s.data.oneLiner}</p>}
+        </div>
+      </a>
+    );
+  })}
+</div>
