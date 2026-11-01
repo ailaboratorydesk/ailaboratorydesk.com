@@ -9,8 +9,9 @@ served by GitHub Pages at <https://www.ailaboratorydesk.com>.
 
 - **Never push to `main`, never merge, never force-push, never rewrite history, never delete branches.**
   Work on a branch and open a pull request. Daniel merges.
-- **Keep "Available for AI consulting"** on the homepage, with a working contact form. It is the
-  specimen for the AI LABORATORY trademark application (serial 99869622). `npm test` fails without it.
+- **Keep the AI consulting offer** ("Making your ideas into reality") on the homepage, with a working
+  contact form. It is the specimen for the AI LABORATORY trademark application (serial 99869622).
+  `npm test` fails without them. (Daniel removed the "Available for AI consulting" wording on Nov 1, 2026.)
 - **Invent nothing.** Use only facts already in Daniel's write-ups: no made-up clients, results,
   testimonials, quotes, or prices.
 - **Spelling:** the book series is *The Luminari Expanse* — never "Luminary". The build fails on it.

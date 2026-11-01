@@ -6,18 +6,22 @@ order: 3
 domains:
   - "Analysis"
 categories:
-  - "finance-analysis"
+  - "analysis"
 tools:
   - "NotebookLM"
   - "Claude"
 featured: false
 cover:
-  src: "/AI%20Lab%20Logo.png"
-  alt: "AI Laboratory logo"
+  src: "/analysis-icon-800.jpg"
+  alt: "Magnifying glass over documents and data traces"
 icon: "audit"
 visual:
-  type: "illustration"
-  name: "audit-money-flow"
+  type: "image"
+  src: "/analysis-icon-800.jpg"
+  alt: "Magnifying glass over documents and data traces"
+  href: "/financial-audit-case-study.pdf"
+  badge: "Read case study ↗"
+  fit: "cover"
 stats:
   - value: "~15 hrs"
     label: "vs. weeks of manual work"

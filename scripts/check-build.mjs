@@ -25,8 +25,8 @@ function walk(dir, out = []) {
 if (!exists('index.html')) errors.push('dist/index.html is missing');
 else {
   const home = read('index.html');
-  // Trademark specimen: the offer and a working contact route must stay.
-  if (!home.includes('Available for AI consulting')) errors.push('homepage lost "Available for AI consulting"');
+  // Trademark specimen: the consulting offer and a working contact route must stay.
+  if (!home.includes('Making your ideas into reality')) errors.push('homepage lost the consulting heading "Making your ideas into reality"');
   if (!/<form[^>]+action="https:\/\/api\.web3forms\.com\/submit"[^>]*method="POST"/.test(home))
     errors.push('homepage contact form (Web3Forms) is missing');
   if (!/<input type="hidden" name="access_key" value="[^"]+"/.test(home))
@@ -70,7 +70,16 @@ if (lib) for (const slug of slugs) if (!lib.includes(`href="/work/${slug}/"`)) e
 
 // Category pages: at least one, none empty, and the homepage links to each one and to the library.
 const catDir = path.join(workDir, 'category');
-const cats = fs.existsSync(catDir) ? fs.readdirSync(catDir) : [];
+const isRedirect = (f) => /<meta http-equiv="refresh"/i.test(read(f));
+const allCats = fs.existsSync(catDir) ? fs.readdirSync(catDir) : [];
+// Redirects from renamed categories: each must point at a category page that exists.
+for (const c of allCats.filter((c) => isRedirect(`work/category/${c}/index.html`))) {
+  const m = read(`work/category/${c}/index.html`).match(/content="\d+;\s*url=([^"]+)"/i);
+  const to = m ? new URL(m[1], `${SITE}/`).pathname : '';
+  if (!to || !exists(`${decodeURIComponent(to)}index.html`) || isRedirect(`${decodeURIComponent(to).slice(1)}index.html`))
+    errors.push(`work/category/${c}/: redirect target ${to || '(none)'} is not a built category page`);
+}
+const cats = allCats.filter((c) => !isRedirect(`work/category/${c}/index.html`));
 if (cats.length === 0) errors.push('no /work/category/<slug>/ pages were built');
 const homeHtml = exists('index.html') ? read('index.html') : '';
 if (!homeHtml.includes('href="/work/"')) errors.push('homepage has no link to the /work/ library');
@@ -97,5 +106,5 @@ for (const f of walk(DIST).filter((f) => f.endsWith('.html') && !f.endsWith('fol
 
 for (const w of [...new Set(warnings)]) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`ERROR ${e}`);
-console.log(`check-build: ${slugs.length} case study pages, ${cats.length} category pages, ${errors.length} error(s), ${new Set(warnings).size} warning(s)`);
+console.log(`check-build: ${slugs.length} case study pages, ${cats.length} category pages, ${allCats.length - cats.length} redirect(s), ${errors.length} error(s), ${new Set(warnings).size} warning(s)`);
 process.exit(errors.length ? 1 : 0);

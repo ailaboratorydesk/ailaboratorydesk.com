@@ -1,8 +1,7 @@
 ---
 /**
  * Consulting section (LAB-3), rendered right after the hero. Ported unchanged
- * from the merged single-page site (PR #1). "Available for AI consulting" must
- * stay: it is the AI LABORATORY trademark specimen.
+ * from the merged single-page site (PR #1).
  *
  * Each project named in a "See" line links to its /work/<slug>/ page with a
  * small thumbnail taken from that case study's `cover` image. Studies whose
@@ -12,11 +11,10 @@ import { getCaseStudies } from '../lib/case-studies';
 
 const studies = new Map((await getCaseStudies()).map((s) => [s.id, s]));
 /** Studies shown with their card icon rather than the cover image. */
-const ICON_THUMB: Record<string, string> = {
-  'financial-audit': `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v8"/><path d="M14 3v4h4"/><path d="M6 13h5"/><path d="M6 16.5h3"/><circle cx="15.5" cy="17.5" r="3"/><path d="M17.8 19.8 21 23"/></svg>`,
-};
+const ICON_THUMB: Record<string, string> = {};
 const THUMB_SRC: Record<string, string> = {
   'the-red-omen': '/red-omen-thumb.jpg',
+  'financial-audit': '/analysis-icon-thumb.jpg',
 };
 const link = (slug: string) => {
   const s = studies.get(slug);
@@ -38,8 +36,8 @@ const L = {
   <div class="wrap">
     <div class="section-head">
       <div class="section-eyebrow">AI LABORATORY™ consulting services</div>
-      <h2 class="section-title">Available for AI consulting</h2>
-      <p class="section-lead">Making your ideas into reality — from first idea to working result. I help people and small teams get there with AI, the same way every project on this page was built.</p>
+      <h2 class="section-title">Making your ideas into reality</h2>
+      <p class="section-lead">From first idea to working result, I help people and small teams get there with AI, the same way every project on this page was built.</p>
     </div>
 
     <div class="offer-grid">
@@ -67,9 +65,9 @@ const L = {
 
     <div class="consult-sub">Who it's for</div>
     <div class="forwho">
-      <div><b>Authors &amp; creators</b>Writers and creators who want AI working across their publishing, content, and online presence.</div>
       <div><b>Small teams &amp; companies</b>Teams with a problem worth solving with AI and a need for a working result, not a demo.</div>
       <div><b>New-territory projects</b>Anyone with an idea outside their wheelhouse — every project here started that way.</div>
+      <div><b>Authors &amp; creators</b>Writers and creators who want AI working across their publishing, content, and online presence.</div>
     </div>
 
     <div class="consult-sub">How it works</div>

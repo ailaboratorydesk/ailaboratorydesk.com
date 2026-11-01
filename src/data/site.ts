@@ -1,14 +1,14 @@
 /**
  * Site-wide settings. Change contact routes here, in one place.
  *
- * "Available for AI consulting" plus a working contact route must stay on the
- * site: it is the specimen for the AI LABORATORY trademark filing.
+ * A working contact route (the Web3Forms form) must stay on the site: it is part
+ * of the specimen for the AI LABORATORY trademark filing.
  */
 export const SITE = {
   url: 'https://www.ailaboratorydesk.com',
   name: 'AI LABORATORY™',
   author: 'Daniel Stroup',
-  title: 'AI LABORATORY™ | AI Consulting by Daniel Stroup',
+  title: 'AI LABORATORY™ | AI Consulting',
   description:
     'AI LABORATORY™ consulting services: Daniel Stroup advises individuals and small teams on taking AI projects from concept to delivery.',
   /** Default share image (Open Graph / Twitter card), served from public/. */
