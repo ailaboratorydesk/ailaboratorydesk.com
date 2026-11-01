@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Consulting from '../components/Consulting.astro';
 import ConsultingCta from '../components/ConsultingCta.astro';
-import CaseStudyCard from '../components/CaseStudyCard.astro';
+import ProjectCarousel from '../components/ProjectCarousel.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 import { getCaseStudies } from '../lib/case-studies';
@@ -22,9 +22,7 @@ const studies = await getCaseStudies();
         <p class="section-lead">Each project took on a new field — the unfamiliar, made familiar. Tap any card to open the full case study.</p>
       </div>
 
-      <div class="cards">
-        {studies.map((entry) => <CaseStudyCard entry={entry} />)}
-      </div>
+      <ProjectCarousel studies={studies} indicators="thumbs" counterLabel="CH" />
 
       <ConsultingCta />
     </div>
