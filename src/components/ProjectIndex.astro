@@ -1,0 +1,21 @@
+---
+/** Compact one-line index of every case study (redesign mockup). Each chip opens /work/<slug>/. */
+import type { CaseStudy } from '../lib/case-studies';
+import { slideImage } from '../lib/slides';
+import CaseStudyIcon from './CaseStudyIcon.astro';
+interface Props { studies: CaseStudy[]; label?: string }
+const { studies, label = 'All projects' } = Astro.props;
+---
+<nav class="pindex" aria-label={label}>
+  <span class="pindex-lbl">{label}</span>
+  {studies.map((s) => {
+    const img = slideImage(s);
+    const thumb = s.id === 'the-red-omen' ? '/red-omen-thumb.jpg' : img.src;
+    return (
+      <a href={`/work/${s.id}/`}>
+        {img.placeholder ? <span class="pi-ico" aria-hidden="true"><CaseStudyIcon name={s.data.icon} /></span> : <img src={thumb} alt="" width="22" height="22" loading="lazy" decoding="async" />}
+        {s.data.title}
+      </a>
+    );
+  })}
+</nav>
