@@ -26,7 +26,7 @@ visual:
   fit: "cover"
 stats:
   - value: "6 platforms"
-    label: "tested head-to-head"
+    label: "compared head-to-head"
   - value: "~70 min"
     label: "first prompt to finished comic"
   - value: "Finding"
@@ -46,11 +46,11 @@ A practical question for anyone weighing AI image generation as a production too
 
 ## Starting Competence
 
-Limited prior AI image-generation experience, no comic-production experience. Brought prompt design, a controlled-comparison methodology, and the ability to evaluate outputs against clear criteria.
+Limited prior AI image-generation experience, no comic-production experience. Brought prompt design, a side-by-side comparison approach, and the ability to evaluate outputs against clear criteria.
 
 ## How AI Was Used
 
-A single master prompt — character descriptions, reference photos, setting, art-style parameters — was submitted identically to all six platforms, a controlled comparison holding input constant and varying only the platform. Grok produced the highest volume fastest on free tier (most final panels); ChatGPT had the best per-image quality; others hit free-tier limits quickly.
+A single master prompt — character descriptions, reference photos, setting, art-style parameters — was submitted identically to all six platforms, a side-by-side comparison holding input constant and varying only the platform. Grok produced the highest volume fastest on free tier (most final panels); ChatGPT had the best per-image quality; others hit free-tier limits quickly.
 
 ## Timeline & Conditions
 

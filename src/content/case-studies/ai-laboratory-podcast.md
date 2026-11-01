@@ -41,7 +41,7 @@ A live-streamed video podcast broadcast simultaneously to YouTube, X, and Twitch
 
 ## Why It Was Built
 
-Two problems: prior podcast attempts demanded 2–12 hours of post-production per episode (a motivation-killer), and AI experimentation stays shallow without a forcing function. The show solved both — automated production for sustainability, and a live cadence to tackle a real AI problem every episode.
+Two problems: prior podcast attempts demanded 2–12 hours of post-production per episode (a motivation-killer), and AI work stays shallow without a forcing function. The show solved both — automated production for sustainability, and a live cadence to tackle a real AI problem every episode.
 
 ## Starting Competence
 
@@ -65,4 +65,4 @@ Proved a fully automated, multi-platform production workflow is achievable with 
 
 ## Lessons Learned
 
-Design the architecture before you build. Automation solves the production problem, not the motivation problem — a collaboration-dependent format needs guests secured up front. Failure is valid data. Side projects compound.
+Design the architecture before you build. Automation solves the production problem, not the motivation problem — a collaboration-dependent format needs guests secured up front. Missteps are part of the work. Side projects compound.
