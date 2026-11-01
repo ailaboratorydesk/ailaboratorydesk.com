@@ -200,6 +200,12 @@ a{color:var(--accent);text-decoration:none}
 .offer p{color:#cdd9e0;font-size:15px;line-height:1.65}
 .offer .offer-proof{margin-top:12px;font-size:13px;color:var(--text-muted);line-height:1.55}
 .offer .offer-proof span{color:var(--accent);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:11px;margin-right:6px}
+.offer .offer-proof a.case-link{color:#cdd9e0;text-decoration:none;border-radius:5px;transition:color .2s,background .2s}
+.offer .offer-proof .cl-nw{white-space:nowrap;font-weight:inherit}
+.offer .offer-proof a.case-link:hover{color:var(--accent);background:var(--accent-dim)}
+.offer .offer-proof a.case-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px;color:var(--accent)}
+.offer .offer-proof a.case-link img,.offer .offer-proof .cl-ico{display:inline-block;width:20px;height:20px;margin-right:5px;vertical-align:-6px;border-radius:4px;border:1px solid var(--rule);object-fit:cover}
+.offer .offer-proof .cl-ico{display:inline-flex;align-items:center;justify-content:center;background:var(--accent-dim);color:var(--accent)}
 .consult-sub{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:46px 0 16px}
 .forwho{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .forwho div{border-left:2px solid var(--accent);padding:4px 0 4px 16px;color:#cdd9e0;font-size:15px;line-height:1.65}
