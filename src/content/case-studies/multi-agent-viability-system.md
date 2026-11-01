@@ -7,6 +7,8 @@ order: 5
 domains:
   - "AI systems"
   - "Analysis"
+categories:
+  - "ai-agents-automation"
 tools:
   - "CrewAI"
   - "Claude (Anthropic API)"

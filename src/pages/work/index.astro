@@ -1,0 +1,115 @@
+---
+/**
+ * Library: every case study as an image card, with category filter chips and a
+ * text search (client-side). Without JavaScript all studies show and each chip
+ * links to its category page. With JavaScript the filter syncs to the URL:
+ * /work/?category=<slug>&q=<words>.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StudyCard from '../../components/StudyCard.astro';
+import { getCaseStudies } from '../../lib/case-studies';
+import { getCategories } from '../../lib/categories';
+import { SITE } from '../../data/site';
+
+const studies = await getCaseStudies();
+const categories = await getCategories();
+const n = studies.length;
+---
+<BaseLayout
+  title={`All projects — ${SITE.name} — ${SITE.author}`}
+  description={`All ${n} AI LABORATORY™ case studies by ${SITE.author}, by category.`}
+  path="/work/"
+>
+  <main class="section" id="library">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/#work">Work</a> <span>/</span> <span aria-current="page">Library</span></nav>
+      <div class="section-head">
+        <div class="section-eyebrow">Library</div>
+        <h1 class="section-title">All projects</h1>
+        <p class="section-lead">Every case study in one place. Pick a category or search by name, tool or topic.</p>
+      </div>
+
+      <div class="lib-tools">
+        <div class="lib-search" data-search hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <label class="sr-only" for="lib-q">Search projects</label>
+          <input id="lib-q" type="search" placeholder="Search projects, tools, topics…" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="lib-chips" role="group" aria-label="Filter by category">
+          <a class="chip-link" href="/work/" data-cat="" aria-pressed="true">All <b>{n}</b></a>
+          {categories.map((c) => <a class="chip-link" href={c.href} data-cat={c.slug} aria-pressed="false">{c.name} <b>{c.studies.length}</b></a>)}
+        </div>
+      </div>
+
+      <p class="lib-count" aria-live="polite"><span data-count>{n}</span> of {n} projects</p>
+
+      <div class="sc-grid" data-grid>
+        {studies.map((s) => <StudyCard study={s} headingLevel="h2" />)}
+      </div>
+      <div class="lib-empty" data-empty hidden>
+        <p>No projects match that search.</p>
+        <button class="btn btn-secondary" type="button" data-reset>Clear filters</button>
+      </div>
+
+      <div class="cs-page-actions">
+        <a class="btn btn-primary" href="/#contact">Request a Consultation <span class="arr">→</span></a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  const root = document.getElementById('library')!;
+  const search = root.querySelector<HTMLElement>('[data-search]')!;
+  const input = root.querySelector<HTMLInputElement>('#lib-q')!;
+  const chips = [...root.querySelectorAll<HTMLAnchorElement>('.lib-chips [data-cat]')];
+  const cards = [...root.querySelectorAll<HTMLElement>('[data-grid] .sc')];
+  const count = root.querySelector<HTMLElement>('[data-count]')!;
+  const empty = root.querySelector<HTMLElement>('[data-empty]')!;
+  const known = new Set(chips.map((c) => c.dataset.cat));
+  search.hidden = false;
+  chips.forEach((c) => c.setAttribute('role', 'button'));
+
+  const params = new URLSearchParams(location.search);
+  let cat = params.get('category') ?? '';
+  if (!known.has(cat)) cat = '';
+  input.value = params.get('q') ?? '';
+
+  const apply = (push = false) => {
+    const terms = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+    let shown = 0;
+    for (const card of cards) {
+      const okCat = !cat || (card.dataset.cats ?? '').split(' ').includes(cat);
+      const text = card.dataset.text ?? '';
+      const ok = okCat && terms.every((t) => text.includes(t));
+      card.hidden = !ok;
+      if (ok) shown++;
+    }
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.cat === cat)));
+    count.textContent = String(shown);
+    empty.hidden = shown > 0;
+    const q = new URLSearchParams();
+    if (cat) q.set('category', cat);
+    if (input.value.trim()) q.set('q', input.value.trim());
+    const url = `${location.pathname}${q.toString() ? `?${q}` : ''}`;
+    history[push ? 'pushState' : 'replaceState'](null, '', url);
+  };
+
+  chips.forEach((c) =>
+    c.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      cat = c.dataset.cat ?? '';
+      apply(true);
+    }),
+  );
+  input.addEventListener('input', () => apply());
+  root.querySelector('[data-reset]')!.addEventListener('click', () => { cat = ''; input.value = ''; apply(true); input.focus(); });
+  window.addEventListener('popstate', () => {
+    const p = new URLSearchParams(location.search);
+    cat = known.has(p.get('category') ?? '') ? p.get('category') ?? '' : '';
+    input.value = p.get('q') ?? '';
+    apply();
+  });
+  apply();
+</script>

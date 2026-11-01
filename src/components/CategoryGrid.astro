@@ -1,0 +1,23 @@
+---
+/** Home-page category tiles (bento style): one per category that has case studies. */
+import type { Category } from '../lib/categories';
+import CaseStudyIcon from './CaseStudyIcon.astro';
+interface Props { categories: Category[] }
+const { categories } = Astro.props;
+---
+<div class="catgrid">
+  {categories.map((c, i) => (
+    <a class:list={['cat-tile', { 'cat-wide': i === 0 && categories.length % 3 === 2 }]} href={c.href}>
+      <div class:list={['cat-media', { 'cat-contain': c.image?.fit === 'contain', 'cat-ph': !c.image }]}>
+        {c.image
+          ? <img src={c.image.src} alt="" style={c.image.pos ? `object-position:${c.image.pos}` : undefined} loading="lazy" decoding="async" />
+          : <CaseStudyIcon name={c.icon} />}
+      </div>
+      <div class="cat-body">
+        <div class="cat-count">{c.studies.length} {c.studies.length === 1 ? 'project' : 'projects'}</div>
+        <h4 class="cat-name">{c.name}</h4>
+        <p class="cat-desc">{c.description}</p>
+      </div>
+    </a>
+  ))}
+</div>

@@ -6,6 +6,8 @@ order: 1
 domains:
   - "Hardware"
   - "Software"
+categories:
+  - "hardware-robotics"
 tools:
   - "Raspberry Pi 4"
   - "LewanSoul/Hiwonder tank chassis"

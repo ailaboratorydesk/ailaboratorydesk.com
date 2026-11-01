@@ -4,14 +4,36 @@
 # Every field is checked by the schema in src/content.config.ts. A mistake fails `npm run build`.
 # Use only facts that already exist (Daniel's own write-ups). Never invent clients, results,
 # testimonials, quotes, or prices.
+#
+# HOW TO ADD A CASE STUDY
+#   1. Copy this file to src/content/case-studies/<slug>.md (the slug "category" is reserved).
+#   2. Fill in every field; list one or more categories (slugs from src/data/categories.ts).
+#   3. Put any image in public/ and reference it as "/File%20Name.jpg".
+#   4. Run `npm test`. Nothing else to edit: the library (/work/), each category page
+#      (/work/category/<slug>/), the home category counts and the "Related projects"
+#      strips all update from the categories list. Search covers title, one-liner,
+#      category names, tags and tools.
+#
+# HOW TO ADD A CATEGORY
+#   1. Add an entry to CATEGORIES in src/data/categories.ts: slug (lowercase-hyphens),
+#      name, one-line description, image (an existing file in public/, or omit it to use
+#      the icon placeholder), icon, and featured (the slug of the study shown for this
+#      category in the home carousel; it must list this category, or the build fails).
+#   2. Add the slug to the `categories:` list of each case study that belongs in it.
+#   3. Run `npm test`. A category with no case studies is hidden everywhere, and the
+#      order of CATEGORIES is the order of the home carousel, home tiles and library chips.
 
 title: "Project name"                      # 1–120 characters
 oneLiner: "One sentence: what was built and why it matters (20–320 characters)."
 date: "2026-06"                            # YYYY, YYYY-MM, or YYYY-MM-DD
-order: 9                                   # position on the homepage; must be unique
+order: 9                                   # position in the library, category pages and related strips; must be unique
 domains:                                   # one or more of: Writing, Hardware, Software, Analysis, Media, AI systems
   - "Software"
-tools:                                     # at least one
+categories:                                # one or more slugs from src/data/categories.ts
+  - "software-apps"
+# tags:                                   # optional extra search words for the library
+#   - "mobile app"
+tools:                                     # at least one (also searchable in the library)
   - "Claude"
 featured: false                            # true for at most a few headline studies
 cover:                                     # share image (og:image); file must be in public/

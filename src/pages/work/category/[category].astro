@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import StudyCard from '../../../components/StudyCard.astro';
+import { getCategories, type Category } from '../../../lib/categories';
+import { getCaseStudies } from '../../../lib/case-studies';
+import { SITE } from '../../../data/site';
+
+export async function getStaticPaths() {
+  const categories = await getCategories();
+  return categories.map((category) => ({ params: { category: category.slug }, props: { category, others: categories.filter((c) => c.slug !== category.slug) } }));
+}
+
+interface Props { category: Category; others: Category[] }
+const { category: c, others } = Astro.props;
+const total = (await getCaseStudies()).length;
+const n = c.studies.length;
+---
+<BaseLayout
+  title={`${c.name} — ${SITE.name} — ${SITE.author}`}
+  description={c.description}
+  path={c.href}
+  ogImage={c.image?.src}
+  ogImageAlt={c.image?.alt}
+>
+  <main class="section">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/#work">Work</a> <span>/</span> <a href="/work/">Library</a> <span>/</span> <span aria-current="page">{c.name}</span></nav>
+      <div class="section-head">
+        <div class="section-eyebrow">Category · {n} {n === 1 ? 'project' : 'projects'}</div>
+        <h1 class="section-title">{c.name}</h1>
+        <p class="section-lead">{c.description}</p>
+      </div>
+      <div class="sc-grid">
+        {c.studies.map((s) => <StudyCard study={s} headingLevel="h2" />)}
+      </div>
+      <div class="cat-others">
+        <span class="cat-others-lbl">Other categories</span>
+        {others.map((o) => <a class="chip-link" href={o.href}>{o.name} <b>{o.studies.length}</b></a>)}
+      </div>
+      <div class="cs-page-actions">
+        <a class="btn btn-secondary" href="/work/">Browse all {total} projects <span class="arr">→</span></a>
+        <a class="btn btn-primary" href="/#contact">Request a Consultation <span class="arr">→</span></a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

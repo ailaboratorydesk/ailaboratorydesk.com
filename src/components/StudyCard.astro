@@ -1,0 +1,31 @@
+---
+/**
+ * Image card for one case study, linking to /work/<slug>/. Used by the library,
+ * the category pages and the "Related projects" strip. The data-* attributes
+ * feed the library's client-side filter and search.
+ */
+import type { CaseStudy } from '../lib/case-studies';
+import { slideImage } from '../lib/slides';
+import { categoriesOf } from '../lib/categories';
+import CaseStudyIcon from './CaseStudyIcon.astro';
+interface Props { study: CaseStudy; size?: 'md' | 'sm'; headingLevel?: 'h2' | 'h3' }
+const { study: s, size = 'md', headingLevel = 'h3' } = Astro.props;
+const img = slideImage(s);
+const cats = categoriesOf(s);
+const H = headingLevel;
+const searchText = [s.data.title, s.data.oneLiner, ...cats.map((c) => c.name), ...s.data.tags, ...s.data.tools]
+  .join(' ')
+  .toLowerCase();
+---
+<a class:list={['sc', `sc-${size}`]} href={`/work/${s.id}/`} data-cats={cats.map((c) => c.slug).join(' ')} data-text={searchText}>
+  <div class:list={['sc-media', { 'sc-contain': img.fit === 'contain', 'sc-ph': img.placeholder }]}>
+    {img.placeholder
+      ? <CaseStudyIcon name={s.data.icon} />
+      : <img src={img.src} alt="" style={`object-position:${img.pos}`} loading="lazy" decoding="async" />}
+  </div>
+  <div class="sc-body">
+    <div class="sc-cats">{cats.map((c) => c.name).join(' · ')}</div>
+    <H class="sc-title">{s.data.title}</H>
+    {size === 'md' && <p class="sc-line">{s.data.oneLiner}</p>}
+  </div>
+</a>
