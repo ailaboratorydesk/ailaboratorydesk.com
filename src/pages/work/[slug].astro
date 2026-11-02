@@ -37,7 +37,7 @@ const related = relatedTo(entry, all);
         <section class="related" aria-labelledby="related-h">
           <div class="related-head">
             <h2 class="consult-sub" id="related-h">Related projects</h2>
-            <a class="work-all" href="/work/">Browse all {all.length} projects <span class="arr">→</span></a>
+            <a class="work-all" href="/work/">Browse all projects <span class="arr">→</span></a>
           </div>
           <div class="related-row">{related.map((s) => <StudyCard study={s} size="sm" />)}</div>
         </section>
