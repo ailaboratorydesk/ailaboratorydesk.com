@@ -86,7 +86,13 @@ const slides = studies.map((s) => ({ s, img: slideImage(s) }));
       });
       dots.forEach((d, k) => (k === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
       const active = dots[i];
-      if (active && root.classList.contains('pc-thumbs')) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      // Keep the active thumbnail visible by scrolling only the thumbnail strip, never the page.
+      const strip = active?.parentElement;
+      if (active && strip && root.classList.contains('pc-thumbs')) {
+        const l = active.offsetLeft - strip.offsetLeft, r = l + active.offsetWidth;
+        if (l < strip.scrollLeft) strip.scrollLeft = l;
+        else if (r > strip.scrollLeft + strip.clientWidth) strip.scrollLeft = r - strip.clientWidth;
+      }
       if (announce) live.textContent = slides[i].getAttribute('aria-label') ?? '';
       root.dataset.index = String(i);
     };
