@@ -67,7 +67,7 @@ scripts/check-security.mjs    secret / personal-data scan of tracked files
    Each study ends its `links:` with its long-form PDF: `Read the full case study` → `/<slug>-case-study.pdf`.
    `date` decides order: the library, category pages and related strips list newest first (a year-only
    date counts as the start of that year; equal dates fall back to `order`), every card shows the date,
-   and the home carousel shows each category's newest study. `check-build` fails if a list is out of order.
+   and the home carousel shows each category's newest primary study (first-listed category), never the same study twice. `check-build` fails if a list is out of order.
 5. Run `npm test`, check the homepage card and `/work/<slug>/` in `npm run dev`, then open a PR.
 
 Files whose name starts with `_` are ignored by the collection (use that for drafts you keep locally — but
