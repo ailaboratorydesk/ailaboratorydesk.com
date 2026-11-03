@@ -36,7 +36,7 @@ served by GitHub Pages at <https://www.ailaboratorydesk.com>.
 astro.config.mjs              site URL, static output, Markdown pipeline
 src/content.config.ts         caseStudies collection + strict zod schema (the source of truth for fields)
 src/content/case-studies/     one .md per case study (filename = URL slug)
-src/lib/case-studies.ts       loads/sorts studies; extra build-time checks (sections, order, spelling)
+src/lib/case-studies.ts       loads studies newest first (date, then order); date formatting; extra build-time checks
 src/lib/rehype-case-study-sections.mjs   turns "## Heading" blocks into the card's section markup
 src/data/site.ts              site name, description, social links, contact form endpoint
 src/layouts/BaseLayout.astro  <head> (title, canonical, Open Graph, Twitter card), nav, footer
@@ -61,6 +61,10 @@ scripts/check-security.mjs    secret / personal-data scan of tracked files
    What Was Built · Why It Was Built · Starting Competence · How AI Was Used ·
    Timeline & Conditions · Outcome & Evidence · Key Metrics · Lessons Learned.
 4. Put any linked files (PDF, image) in `public/` and link them root-relative with spaces as `%20`.
+   Each study ends its `links:` with its long-form PDF: `Read the full case study` → `/<slug>-case-study.pdf`.
+   `date` decides order: the library, category pages and related strips list newest first (a year-only
+   date counts as the start of that year; equal dates fall back to `order`), every card shows the date,
+   and the home carousel shows each category's newest study. `check-build` fails if a list is out of order.
 5. Run `npm test`, check the homepage card and `/work/<slug>/` in `npm run dev`, then open a PR.
 
 Files whose name starts with `_` are ignored by the collection (use that for drafts you keep locally — but

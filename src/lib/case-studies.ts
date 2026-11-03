@@ -5,8 +5,32 @@ export type CaseStudy = CollectionEntry<'caseStudies'>;
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 /**
- * All case studies in homepage order, after checks the schema cannot express:
+ * Sortable number for a partial ISO date ("2026", "2026-10", "2026-01-20").
+ * A missing month or day counts as the start of that year or month, so
+ * "2026" sorts before "2026-01-20", which sorts before "2026-10".
+ */
+export function dateKey(date: string): number {
+  const [y, m = 0, d = 0] = date.split('-').map(Number);
+  return y * 10000 + m * 100 + d;
+}
+
+/** Readable date: "2025", "Oct 2026" or "Jan 20, 2026". */
+export function formatDate(date: string): string {
+  const [y, m, d] = date.split('-').map(Number);
+  if (!m) return String(y);
+  if (!d) return `${MONTHS[m - 1]} ${y}`;
+  return `${MONTHS[m - 1]} ${d}, ${y}`;
+}
+
+/** Newest first; studies with the same date fall back to `order` (lower first). */
+export const byNewest = (a: CaseStudy, b: CaseStudy) =>
+  dateKey(b.data.date) - dateKey(a.data.date) || a.data.order - b.data.order;
+
+/**
+ * All case studies, newest first (ties broken by `order`), after checks the schema cannot express: after checks the schema cannot express:
  * file-name slugs, unique `order` values, and the eight required body sections.
  * Any problem throws, which fails `astro build`.
  */
@@ -34,7 +58,7 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
   }
 
   if (problems.length) throw new Error(`Invalid case studies:\n- ${problems.join('\n- ')}`);
-  return entries.sort((a, b) => a.data.order - b.data.order);
+  return entries.sort(byNewest);
 }
 
 /** Absolute URL for a root-relative path. */

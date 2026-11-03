@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyCard from '../../components/CaseStudyCard.astro';
 import StudyCard from '../../components/StudyCard.astro';
-import { getCaseStudies, type CaseStudy } from '../../lib/case-studies';
+import { formatDate, getCaseStudies, type CaseStudy } from '../../lib/case-studies';
 import { categoriesOf, categoryHref, relatedTo } from '../../lib/categories';
 import { SITE } from '../../data/site';
 
@@ -29,7 +29,7 @@ const related = relatedTo(entry, all);
   <main class="section">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-eyebrow">Case Study</div>
+        <div class="section-eyebrow">Case Study · <time class="cs-date" datetime={d.date}>{formatDate(d.date)}</time></div>
         <div class="cs-cats" aria-label="Categories">{cats.map((c) => <a class="chip-link" href={categoryHref(c.slug)}>{c.name}</a>)}</div>
       </div>
       <CaseStudyCard entry={entry} mode="page" />

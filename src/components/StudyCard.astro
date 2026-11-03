@@ -4,7 +4,7 @@
  * the category pages and the "Related projects" strip. The data-* attributes
  * feed the library's client-side filter and search.
  */
-import type { CaseStudy } from '../lib/case-studies';
+import { formatDate, type CaseStudy } from '../lib/case-studies';
 import { slideImage } from '../lib/slides';
 import { categoriesOf } from '../lib/categories';
 import CaseStudyIcon from './CaseStudyIcon.astro';
@@ -24,7 +24,7 @@ const searchText = [s.data.title, s.data.oneLiner, ...cats.map((c) => c.name), .
       : <img src={img.src} alt="" style={`object-position:${img.pos}`} loading="lazy" decoding="async" />}
   </div>
   <div class="sc-body">
-    <div class="sc-cats">{cats.map((c) => c.name).join(' · ')}</div>
+    <div class="sc-meta"><span class="sc-cats">{cats.map((c) => c.name).join(' · ')}</span><time class="sc-date" datetime={s.data.date}>{formatDate(s.data.date)}</time></div>
     <H class="sc-title">{s.data.title}</H>
     {size === 'md' && <p class="sc-line">{s.data.oneLiner}</p>}
   </div>

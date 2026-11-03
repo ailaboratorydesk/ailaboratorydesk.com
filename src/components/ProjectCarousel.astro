@@ -1,12 +1,12 @@
 ---
 /**
  * Featured-project carousel: one large tile at a time with the case study's
- * image, its category name, title and one-liner. Left/right arrow buttons, dot or
+ * image, its category name, date, title and one-liner. Left/right arrow buttons, dot or
  * thumbnail indicators, keyboard arrows, swipe on touch screens. Clicking a
  * tile opens /work/<slug>/. Without JavaScript the track scrolls sideways
  * with scroll-snap, so every tile stays reachable.
  */
-import type { CaseStudy } from '../lib/case-studies';
+import { formatDate, type CaseStudy } from '../lib/case-studies';
 import { slideImage } from '../lib/slides';
 import CaseStudyIcon from './CaseStudyIcon.astro';
 
@@ -40,7 +40,7 @@ const slides = studies.map((s) => ({ s, img: slideImage(s) }));
               )}
             </div>
             <div class="pc-text">
-              <div class="pc-meta"><span class="pc-count">{counterLabel}{counterLabel ? ' ' : ''}{pad(i + 1)} / {pad(n)}</span><span class="pc-domains">{labels?.[i] ?? s.data.domains.join(' · ')}</span></div>
+              <div class="pc-meta"><span class="pc-count">{counterLabel}{counterLabel ? ' ' : ''}{pad(i + 1)} / {pad(n)}</span><span class="pc-domains">{labels?.[i] ?? s.data.domains.join(' · ')}</span><time class="pc-date" datetime={s.data.date}>{formatDate(s.data.date)}</time></div>
               <h3 class="pc-title">{s.data.title}</h3>
               <p class="pc-line">{s.data.oneLiner}</p>
               <span class="pc-open">Open the case study <span class="arr">→</span></span>
