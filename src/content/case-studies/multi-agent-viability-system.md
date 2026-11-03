@@ -9,6 +9,7 @@ domains:
   - "Analysis"
 categories:
   - "ai-agents-automation"
+  - "analysis"
 tools:
   - "CrewAI"
   - "Claude (Anthropic API)"

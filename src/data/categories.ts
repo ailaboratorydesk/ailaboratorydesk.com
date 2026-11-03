@@ -47,7 +47,7 @@ export const CATEGORIES = [
   {
     slug: 'analysis',
     name: 'Analysis',
-    description: 'AI-assisted analysis of messy source records, delivered with every claim cited to file and page.',
+    description: 'AI-assisted analysis, from a forensic review of messy source records to multi-agent business viability reports.',
     image: { src: '/analysis-icon-800.jpg', alt: 'Magnifying glass over documents and data traces', fit: 'contain' },
     icon: 'audit',
   },
