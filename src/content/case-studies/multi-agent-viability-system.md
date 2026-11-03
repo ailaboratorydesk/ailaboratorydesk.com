@@ -1,6 +1,6 @@
 ---
 # date: year only; the case study cites 2026 benchmarks and was added to the site in June 2026.
-title: "Multi-Agent Product Viability System"
+title: "Product Viability Analysis System"
 oneLiner: "Eight AI agents that autonomously turn a product concept into an executive-ready business viability report — with quality control engineered into every step."
 date: "2026"
 order: 5

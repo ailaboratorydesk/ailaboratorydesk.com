@@ -15,6 +15,9 @@ served by GitHub Pages at <https://www.ailaboratorydesk.com>.
 - **Invent nothing.** Use only facts already in Daniel's write-ups: no made-up clients, results,
   testimonials, quotes, or prices.
 - **Spelling:** the book series is *The Luminari Expanse* — never "Luminary". The build fails on it.
+- **No portfolio counts in site copy.** Never hard-code how many projects, case studies or categories
+  there are ("8 projects", "Browse all 8", "Category · 2 projects"); they go stale. Say "all projects".
+  Numbers inside a case study (stats, costs, dates) are fine. `check-build` fails on count phrases.
 - Do not change DNS (GoDaddy), the custom domain, or repository/Pages settings unless Daniel asks.
 
 ## Data security (read before every commit)

@@ -15,6 +15,7 @@ const ICON_THUMB: Record<string, string> = {};
 const THUMB_SRC: Record<string, string> = {
   'the-red-omen': '/red-omen-thumb.jpg',
   'financial-audit': '/analysis-icon-thumb.jpg',
+  'agentic-ai-staff': '/grok-bot-team-thumb.jpg',
 };
 const link = (slug: string) => {
   const s = studies.get(slug);
@@ -22,6 +23,7 @@ const link = (slug: string) => {
   return { href: `/work/${slug}/`, src: THUMB_SRC[slug] ?? s.data.cover.src, icon: ICON_THUMB[slug] };
 };
 const L = {
+  staff: link('agentic-ai-staff'),
   mavs: link('multi-agent-viability-system'),
   omen: link('the-red-omen'),
   lux: link('luminariexpanse'),
@@ -44,7 +46,7 @@ const L = {
       <div class="offer">
         <h3>Agentic AI &amp; multi-agent systems</h3>
         <p>Design and build of multi-agent setups: specialized agents, an orchestrator directing the work, and quality control built into the process rather than bolted on after.</p>
-        <div class="offer-proof"><span>See</span><a class="case-link" href={L.mavs.href}><b class="cl-nw">{L.mavs.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.mavs.icon} /> : <img src={L.mavs.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}Multi-Agent</b> Product Viability System</a> · agent systems for book publishing and content workflows</div>
+        <div class="offer-proof"><span>See</span><a class="case-link" href={L.staff.href}><b class="cl-nw">{L.staff.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.staff.icon} /> : <img src={L.staff.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}Agentic</b> AI Staff</a> · <a class="case-link" href={L.mavs.href}><b class="cl-nw">{L.mavs.icon ? <i class="cl-ico" aria-hidden="true" set:html={L.mavs.icon} /> : <img src={L.mavs.src} alt="" width="20" height="20" loading="lazy" decoding="async" />}Product</b> Viability Analysis System</a> · agent systems for book publishing and content workflows</div>
       </div>
       <div class="offer">
         <h3>AI for authors &amp; creative work</h3>

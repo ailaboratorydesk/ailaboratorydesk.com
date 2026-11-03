@@ -10,7 +10,7 @@
 #   2. Fill in every field; list one or more categories (slugs from src/data/categories.ts).
 #   3. Put any image in public/ and reference it as "/File%20Name.jpg".
 #   4. Run `npm test`. Nothing else to edit: the library (/work/), each category page
-#      (/work/category/<slug>/), the home category counts and the "Related projects"
+#      (/work/category/<slug>/), the home category grid and the "Related projects"
 #      strips all update from the categories list. Search covers title, one-liner,
 #      category names, tags and tools.
 #   Lists are sorted by `date`, newest first, and every card shows it ("Oct 2026",
