@@ -95,9 +95,10 @@ const caseStudies = defineCollection({
       title: text(1, 120),
       /** One sentence under the title; also the page meta/OG description. */
       oneLiner: text(20, 320),
-      /** When the project was completed (or published). Partial ISO date. */
+      /** When the project was completed (or published). Partial ISO date. Shown on every card;
+       *  lists sort newest first, and a year-only date counts as the start of that year. */
       date: partialIsoDate,
-      /** Position on the homepage, 1 = first. Must be unique. */
+      /** Tie-breaker for studies with the same date (lower first). Must be unique. */
       order: z.int().min(1).max(999),
       /** One or more domains from DOMAINS. */
       domains: z.array(z.enum(DOMAINS)).min(1).refine((a) => new Set(a).size === a.length, 'no duplicate domains'),

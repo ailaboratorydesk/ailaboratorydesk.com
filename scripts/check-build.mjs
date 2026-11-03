@@ -89,6 +89,39 @@ for (const c of cats) {
   if (!homeHtml.includes(`href="/work/category/${c}/"`)) errors.push(`homepage has no tile linking to /work/category/${c}/`);
 }
 
+// Dates and newest-first order. Every study card shows its date; the library and each
+// category page list newest first; the home carousel shows each category's newest study.
+const dateKey = (d) => { const [y, m = 0, day = 0] = d.split('-').map(Number); return y * 10000 + m * 100 + day; };
+const cardsIn = (html) => {
+  const out = [];
+  for (const m of html.matchAll(/<a class="sc[ "][^>]*href="(\/work\/[^"]+\/)"[\s\S]*?<\/a>/g)) {
+    const d = m[0].match(/<time class="sc-date" datetime="([^"]+)"/);
+    out.push({ href: m[1], date: d ? d[1] : null });
+  }
+  return out;
+};
+const checkNewestFirst = (file, cards) => {
+  for (const c of cards) if (!c.date) errors.push(`${file}: card ${c.href} shows no date`);
+  for (let i = 1; i < cards.length; i++)
+    if (cards[i - 1].date && cards[i].date && dateKey(cards[i].date) > dateKey(cards[i - 1].date))
+      errors.push(`${file}: ${cards[i].href} (${cards[i].date}) is listed after older ${cards[i - 1].href} (${cards[i - 1].date}); lists must be newest first`);
+};
+if (lib) checkNewestFirst('work/index.html', cardsIn(lib));
+const carousel = [...homeHtml.matchAll(/<a class="pc-slide" href="(\/work\/[^"]+\/)"/g)].map((m) => m[1]);
+for (const c of cats) {
+  const f = `work/category/${c}/index.html`;
+  if (!exists(f)) continue;
+  const cards = cardsIn(read(f));
+  checkNewestFirst(f, cards);
+  if (cards[0] && !carousel.includes(cards[0].href)) warnings.push(`homepage carousel does not show ${cards[0].href}, the newest study in ${c} (fine only if src/data/categories.ts sets a \`featured\` override)`);
+}
+if (carousel.length !== cats.length) errors.push(`homepage carousel has ${carousel.length} slides for ${cats.length} categories`);
+if (!/class="pc-date" datetime="/.test(homeHtml)) errors.push('homepage carousel shows no dates');
+for (const slug of slugs) {
+  const f = `work/${slug}/index.html`;
+  if (exists(f) && !/<time class="cs-date" datetime="/.test(read(f))) errors.push(`${f}: case study page shows no date`);
+}
+
 // Text files: no "Luminary" typo; local links resolve.
 const textFiles = walk(DIST).filter((f) => /\.(html|css|js|xml|txt|json)$/.test(f));
 for (const f of textFiles) {
