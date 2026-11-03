@@ -90,7 +90,7 @@ for (const c of cats) {
 }
 
 // Dates and newest-first order. Every study card shows its date; the library and each
-// category page list newest first; the home carousel shows each category's newest study.
+// category page list newest first; the home carousel shows each category's newest primary study, never one study twice.
 const dateKey = (d) => { const [y, m = 0, day = 0] = d.split('-').map(Number); return y * 10000 + m * 100 + day; };
 const cardsIn = (html) => {
   const out = [];
@@ -113,8 +113,8 @@ for (const c of cats) {
   if (!exists(f)) continue;
   const cards = cardsIn(read(f));
   checkNewestFirst(f, cards);
-  if (cards[0] && !carousel.includes(cards[0].href)) warnings.push(`homepage carousel does not show ${cards[0].href}, the newest study in ${c} (fine only if src/data/categories.ts sets a \`featured\` override)`);
 }
+if (new Set(carousel).size !== carousel.length) errors.push(`homepage carousel shows the same study twice: ${carousel.join(', ')}`);
 if (carousel.length !== cats.length) errors.push(`homepage carousel has ${carousel.length} slides for ${cats.length} categories`);
 if (!/class="pc-date" datetime="/.test(homeHtml)) errors.push('homepage carousel shows no dates');
 for (const slug of slugs) {

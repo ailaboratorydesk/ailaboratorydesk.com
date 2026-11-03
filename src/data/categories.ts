@@ -40,7 +40,7 @@ export const CATEGORIES = [
   {
     slug: 'writing-publishing',
     name: 'Writing & Publishing',
-    description: 'A published novella, an AI-made comic and an author website, each taken from concept to finished result.',
+    description: 'Fiction, comics and author platforms taken from concept to finished result, with AI as a working partner.',
     image: { src: '/red-omen-cover-600.jpg', alt: 'The Red Omen book cover', fit: 'contain' },
     icon: 'book',
   },
@@ -54,7 +54,7 @@ export const CATEGORIES = [
   {
     slug: 'software-apps',
     name: 'Software & Apps',
-    description: 'A cross-platform mobile app and a custom-coded website, built with no prior development experience.',
+    description: 'Apps, websites and robot control software built with AI, starting from no prior development experience.',
     image: { src: '/Life%20Mx%20App.JPG', alt: 'Life Maintenance App icon' },
     icon: 'wrench',
   },
