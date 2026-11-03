@@ -128,6 +128,26 @@ for (const f of textFiles) {
   const s = fs.readFileSync(f, 'utf8');
   if (/luminary/i.test(s)) errors.push(`${f}: contains "Luminary" (the correct spelling is "Luminari")`);
 }
+// No portfolio counts in site copy ("8 projects", "Browse all 8", "Category · 2"): they go stale as
+// studies are added. A phrase is allowed only if it is quoted from a case study's own Markdown.
+const csText = fs.readdirSync('src/content/case-studies').filter((f) => f.endsWith('.md'))
+  .map((f) => fs.readFileSync(path.join('src/content/case-studies', f), 'utf8')).join('\n').replace(/\s+/g, ' ');
+const NUM = String.raw`(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|dozens?)`;
+const COUNT_PHRASES = [
+  new RegExp(String.raw`\b${NUM}\s+(?:projects|case studies|categories)\b`, 'gi'),
+  new RegExp(String.raw`\bbrowse all\s+${NUM}\b`, 'gi'),
+  new RegExp(String.raw`\bcategory\s*·\s*${NUM}\b`, 'gi'),
+  new RegExp(String.raw`\ball\s+${NUM}\s+(?:AI LABORATORY™\s+)?(?:projects|case studies)\b`, 'gi'),
+];
+const visibleText = (html) => html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ')
+  .replace(/<(?:meta|img)\b[^>]*?(?:content|alt)="([^"]*)"[^>]*>/gi, ' $1 ').replace(/<[^>]+>/g, ' ')
+  .replace(/&amp;/g, '&').replace(/&#39;|&#x27;/g, "'").replace(/\s+/g, ' ');
+for (const f of walk(DIST).filter((f) => f.endsWith('.html') && !f.endsWith('followmewagon_report.html'))) {
+  const text = visibleText(fs.readFileSync(f, 'utf8'));
+  for (const re of COUNT_PHRASES)
+    for (const m of text.matchAll(re))
+      if (!csText.toLowerCase().includes(m[0].toLowerCase())) errors.push(`${f}: portfolio count "${m[0]}" in site copy; say "all projects" instead (counts go stale)`);
+}
 for (const f of walk(DIST).filter((f) => f.endsWith('.html') && !f.endsWith('followmewagon_report.html'))) {
   const s = fs.readFileSync(f, 'utf8');
   for (const m of s.matchAll(/\s(?:href|src)="(\/[^"#?]*)"/g)) {

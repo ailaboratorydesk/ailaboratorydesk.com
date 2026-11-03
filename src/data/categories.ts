@@ -3,7 +3,7 @@
  *
  * A case study joins a category by listing its slug in `categories:` in its front matter.
  * Everything else derives from that: the home carousel (each category's newest
- * study), the home category grid and its counts, /work/category/<slug>/ pages,
+ * study), the home category grid, /work/category/<slug>/ pages,
  * the library filter chips and the "Related projects" strip.
  *
  * A category with no case studies is not shown anywhere, so add a category here
@@ -47,7 +47,7 @@ export const CATEGORIES = [
   {
     slug: 'analysis',
     name: 'Analysis',
-    description: 'AI-assisted analysis of messy source records, delivered with every claim cited to file and page.',
+    description: 'AI-assisted analysis, from a forensic review of messy source records to multi-agent business viability reports.',
     image: { src: '/analysis-icon-800.jpg', alt: 'Magnifying glass over documents and data traces', fit: 'contain' },
     icon: 'audit',
   },
@@ -62,7 +62,7 @@ export const CATEGORIES = [
     slug: 'ai-agents-automation',
     name: 'AI Agents & Automation',
     description: 'Multi-agent AI systems with quality control engineered into every step.',
-    image: { src: '/Report%20Snippet.JPG', alt: 'Multi-agent viability report output', pos: 'top center' },
+    image: { src: '/ai-agents-icon-800.jpg', alt: 'A central hub node routing work to a team of AI agent nodes', fit: 'contain' },
     icon: 'network',
   },
   {

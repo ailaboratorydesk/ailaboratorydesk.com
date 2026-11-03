@@ -14,7 +14,6 @@ const { categories } = Astro.props;
           : <CaseStudyIcon name={c.icon} />}
       </div>
       <div class="cat-body">
-        <div class="cat-count">{c.studies.length} {c.studies.length === 1 ? 'project' : 'projects'}</div>
         <h4 class="cat-name">{c.name}</h4>
         <p class="cat-desc">{c.description}</p>
       </div>

@@ -13,11 +13,10 @@ import { SITE } from '../../data/site';
 
 const studies = await getCaseStudies();
 const categories = await getCategories();
-const n = studies.length;
 ---
 <BaseLayout
   title={`All projects — ${SITE.name} — ${SITE.author}`}
-  description={`All ${n} AI LABORATORY™ case studies, browsable by category or search.`}
+  description="Every AI LABORATORY™ case study, browsable by category or search."
   path="/work/"
 >
   <main class="section" id="library">
@@ -36,12 +35,12 @@ const n = studies.length;
           <input id="lib-q" type="search" placeholder="Search projects, tools, topics…" autocomplete="off" spellcheck="false">
         </div>
         <div class="lib-chips" role="group" aria-label="Filter by category">
-          <a class="chip-link" href="/work/" data-cat="" aria-pressed="true">All <b>{n}</b></a>
-          {categories.map((c) => <a class="chip-link" href={c.href} data-cat={c.slug} aria-pressed="false">{c.name} <b>{c.studies.length}</b></a>)}
+          <a class="chip-link" href="/work/" data-cat="" aria-pressed="true">All</a>
+          {categories.map((c) => <a class="chip-link" href={c.href} data-cat={c.slug} aria-pressed="false">{c.name}</a>)}
         </div>
       </div>
 
-      <p class="lib-count" aria-live="polite"><span data-count>{n}</span> of {n} projects</p>
+      <p class="lib-count" aria-live="polite" data-count>Showing all projects</p>
 
       <div class="sc-grid" data-grid>
         {studies.map((s) => <StudyCard study={s} headingLevel="h2" />)}
@@ -86,7 +85,7 @@ const n = studies.length;
       if (ok) shown++;
     }
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.cat === cat)));
-    count.textContent = String(shown);
+    count.textContent = shown === cards.length ? 'Showing all projects' : `${shown} ${shown === 1 ? 'match' : 'matches'}`;
     empty.hidden = shown > 0;
     const q = new URLSearchParams();
     if (cat) q.set('category', cat);
