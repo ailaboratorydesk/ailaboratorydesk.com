@@ -8,6 +8,7 @@ domains:
   - "Software"
 categories:
   - "hardware-robotics"
+  - "software-apps"
 tools:
   - "Raspberry Pi 4"
   - "LewanSoul/Hiwonder tank chassis"

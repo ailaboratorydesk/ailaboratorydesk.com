@@ -7,6 +7,7 @@ domains:
   - "AI systems"
 categories:
   - "ai-agents-automation"
+  - "writing-publishing"
 tags:
   - "multi-agent"
   - "Chief of Staff"
