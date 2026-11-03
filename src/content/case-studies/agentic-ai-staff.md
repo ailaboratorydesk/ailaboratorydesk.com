@@ -55,6 +55,8 @@ links:
     href: "/grok-bot-team.jpg"
   - label: "View the governance diagram"
     href: "/grok-bot-governance.jpg"
+  - label: "Read the full case study"
+    href: "/agentic-ai-staff-case-study.pdf"
 ---
 
 ## What Was Built
