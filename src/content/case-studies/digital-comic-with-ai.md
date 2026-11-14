@@ -1,5 +1,5 @@
 ---
-# date: year only; produced live on the AI Laboratory Podcast (2025). Confirm with Daniel.
+# date: year only; produced live on the AI Laboratory Podcast (2025). No month in any record; confirm with Daniel.
 title: "Creating a Digital Comic Book with AI"
 oneLiner: "A head-to-head comparison of six AI image platforms — same prompt, same characters — producing a 4-page comic in 70 minutes, and an honest finding about where these tools still fail."
 date: "2025"

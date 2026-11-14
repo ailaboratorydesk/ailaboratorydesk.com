@@ -90,7 +90,7 @@ for (const c of cats) {
 }
 
 // Dates and newest-first order. Every study card shows its date; the library and each
-// category page list newest first; the home carousel shows each category's newest primary study, never one study twice.
+// category page list newest first; the home carousel shows each category's most recent primary study, ordered most recently published or revised first, never one study twice.
 const dateKey = (d) => { const [y, m = 0, day = 0] = d.split('-').map(Number); return y * 10000 + m * 100 + day; };
 const cardsIn = (html) => {
   const out = [];
@@ -113,6 +113,18 @@ for (const c of cats) {
   if (!exists(f)) continue;
   const cards = cardsIn(read(f));
   checkNewestFirst(f, cards);
+}
+// Carousel order: most recently published or revised first (recency = later of front-matter `date` and `updated`).
+// Ties are allowed (they fall back to category order). Recency is read from each study's front matter.
+const recencyOf = (slug) => {
+  const fm = fs.readFileSync(path.join('src/content/case-studies', `${slug}.md`), 'utf8').split(/^---\s*$/m)[1] ?? '';
+  const field = (k) => (fm.match(new RegExp(`^${k}:\\s*"?([0-9-]+)"?\\s*$`, 'm')) ?? [])[1];
+  return Math.max(dateKey(field('date') ?? '0'), field('updated') ? dateKey(field('updated')) : 0);
+};
+for (let i = 1; i < carousel.length; i++) {
+  const [prev, cur] = [carousel[i - 1], carousel[i]].map((h) => h.split('/')[2]);
+  if (recencyOf(cur) > recencyOf(prev))
+    errors.push(`homepage carousel: ${cur} (recency ${recencyOf(cur)}) comes after less recent ${prev} (${recencyOf(prev)}); slides must be most recently published or revised first`);
 }
 if (new Set(carousel).size !== carousel.length) errors.push(`homepage carousel shows the same study twice: ${carousel.join(', ')}`);
 if (carousel.length !== cats.length) errors.push(`homepage carousel has ${carousel.length} slides for ${cats.length} categories`);

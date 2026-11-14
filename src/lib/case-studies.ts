@@ -25,12 +25,22 @@ export function formatDate(date: string): string {
   return `${MONTHS[m - 1]} ${d}, ${y}`;
 }
 
+/**
+ * How recently a study was published or revised: the later of `date` and the optional `updated`.
+ * Used only to order the home carousel (see carouselOrder in categories.ts).
+ */
+export const recencyKey = (s: CaseStudy): number =>
+  Math.max(dateKey(s.data.date), s.data.updated ? dateKey(s.data.updated) : 0);
+
+/** Most recently published or revised first; ties fall back to newest date, then `order`. */
+export const byRecency = (a: CaseStudy, b: CaseStudy) => recencyKey(b) - recencyKey(a) || byNewest(a, b);
+
 /** Newest first; studies with the same date fall back to `order` (lower first). */
 export const byNewest = (a: CaseStudy, b: CaseStudy) =>
   dateKey(b.data.date) - dateKey(a.data.date) || a.data.order - b.data.order;
 
 /**
- * All case studies, newest first (ties broken by `order`), after checks the schema cannot express: after checks the schema cannot express:
+ * All case studies, newest first (ties broken by `order`), after checks the schema cannot express:
  * file-name slugs, unique `order` values, and the eight required body sections.
  * Any problem throws, which fails `astro build`.
  */
@@ -45,6 +55,11 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
     const dup = seenOrder.get(e.data.order);
     if (dup) problems.push(`${where}: order ${e.data.order} is already used by ${dup}`);
     seenOrder.set(e.data.order, e.id);
+
+    if (e.data.updated) {
+      if (!/^\d{4}-\d{2}/.test(e.data.updated)) problems.push(`${where}: updated must include a month (YYYY-MM or YYYY-MM-DD)`);
+      else if (dateKey(e.data.updated) < dateKey(e.data.date)) problems.push(`${where}: updated (${e.data.updated}) is earlier than date (${e.data.date})`);
+    }
 
     const headings = [...(e.body ?? '').matchAll(/^##\s+(.+?)\s*$/gm)].map((m) => m[1]);
     if (headings.join('|') !== REQUIRED_SECTIONS.join('|')) {
