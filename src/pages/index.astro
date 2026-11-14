@@ -8,12 +8,14 @@ import CategoryGrid from '../components/CategoryGrid.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 import { getCaseStudies } from '../lib/case-studies';
-import { getCategories } from '../lib/categories';
+import { carouselOrder, getCategories } from '../lib/categories';
 
 const studies = await getCaseStudies();
 const categories = await getCategories();
-const featured = categories.map((c) => c.featuredStudy);
-const featuredLabels = categories.map((c) => c.name);
+// Carousel: most recently published or revised category first (grid below keeps the fixed category order).
+const slides = carouselOrder(categories);
+const featured = slides.map((c) => c.featuredStudy);
+const featuredLabels = slides.map((c) => c.name);
 ---
 <BaseLayout home path="/">
   <Hero />

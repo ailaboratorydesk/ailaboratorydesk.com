@@ -1,8 +1,8 @@
 ---
-# date: year only; the case study cites 2026 benchmarks and was added to the site in June 2026.
+# date: June 2026 = publication month (PDF created and uploaded to the repo Jun 27 2026; Drive copies Jun 10 and Jun 28 2026). Project completion month not recorded; confirm with Daniel.
 title: "Product Viability Analysis System"
 oneLiner: "Eight AI agents that autonomously turn a product concept into an executive-ready business viability report — with quality control engineered into every step."
-date: "2026"
+date: "2026-06"
 order: 5
 domains:
   - "AI systems"

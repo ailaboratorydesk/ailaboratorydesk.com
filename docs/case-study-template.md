@@ -16,21 +16,28 @@
 #   Lists are sorted by `date`, newest first, and every card shows it ("Oct 2026",
 #   "Jan 20, 2026", "2025"). A year-only date counts as the start of that year; studies
 #   with the same date fall back to `order`. The home carousel shows each category's
-#   newest PRIMARY study (the first slug in `categories:`), so list the main category first.
+#   most recent PRIMARY study (the first slug in `categories:`), so list the main category first.
+#   The carousel's slides are ordered most recently published or revised first, so the latest
+#   work leads the page. When you republish a REVISED study, add `updated: "YYYY-MM"` (or
+#   YYYY-MM-DD, not before `date`) in the front matter; recency is the later of `date` and
+#   `updated`. A new study needs nothing extra (its `date` is its recency). `updated` affects
+#   only the carousel; cards and lists still show and sort by `date`.
 #
 # HOW TO ADD A CATEGORY
 #   1. Add an entry to CATEGORIES in src/data/categories.ts: slug (lowercase-hyphens),
 #      name, one-line description, image (an existing file in public/, or omit it to use
-#      the icon placeholder) and icon. The home carousel shows the category's newest
+#      the icon placeholder) and icon. The home carousel shows the category's most recent
 #      primary study; set the optional `featured` (a study slug in that category, or the build
 #      fails) only to pin a different one.
 #   2. Add the slug to the `categories:` list of each case study that belongs in it.
 #   3. Run `npm test`. A category with no case studies is hidden everywhere, and the
-#      order of CATEGORIES is the order of the home carousel, home tiles and library chips.
+#      order of CATEGORIES is the order of the home tiles and library chips, and the tie-break for
+#      the home carousel (which is otherwise ordered by recency).
 
 title: "Project name"                      # 1–120 characters
 oneLiner: "One sentence: what was built and why it matters (20–320 characters)."
 date: "2026-06"                            # YYYY, YYYY-MM, or YYYY-MM-DD; shown on cards, lists sort newest first
+# updated: "2026-11"                       # optional: month of the latest revision; moves the study's category up the home carousel
 order: 10                                  # tie-breaker for studies with the same date (lower first); must be unique
 domains:                                   # one or more of: Writing, Hardware, Software, Analysis, Media, AI systems
   - "Software"

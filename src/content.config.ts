@@ -98,6 +98,10 @@ const caseStudies = defineCollection({
       /** When the project was completed (or published). Partial ISO date. Shown on every card;
        *  lists sort newest first, and a year-only date counts as the start of that year. */
       date: partialIsoDate,
+      /** Optional. Month or day of the latest substantive revision (YYYY-MM or YYYY-MM-DD, not before `date`).
+       *  Used ONLY to order the home carousel (recency = the later of `date` and `updated`); lists and cards
+       *  still sort and show `date`. Set it whenever a revised case study is republished. */
+      updated: partialIsoDate.optional(),
       /** Tie-breaker for studies with the same date (lower first). Must be unique. */
       order: z.int().min(1).max(999),
       /** One or more domains from DOMAINS. */
